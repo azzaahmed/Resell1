@@ -92,7 +92,7 @@ public void getMyItems(){
             for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                 Item item = postSnapshot.getValue(Item.class);
                 Log.e("Get Data", item.getDescription());
-            if(currentUser!=null)
+            if(currentUser!=null&&item.getUserId()!=null)
                 if (item.getUserId().equals(currentUser.getUid())) {
                     itemsList.add(item);
                     Log.d(TAG, "item id " + item.getItem_id());

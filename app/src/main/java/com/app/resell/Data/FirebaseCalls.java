@@ -2,7 +2,6 @@ package com.app.resell.Data;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,25 +17,35 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
+
+import android.content.Context;
+
+import com.google.firebase.database.DataSnapshot;
+
+import com.google.firebase.database.ValueEventListener;
+
+
+
+
 /**
- * Created by azza ahmed on 4/30/2017.
+ * Created by azza ahmed on 5/10/2017.
  */
-public  class  FireBaseCalls {
+public class FireBaseCalls {
+
+
     //defining firebaseauth object
     private FirebaseAuth firebaseAuth;
     //defining a database reference
     private DatabaseReference databaseReference;
     private FirebaseUser user;
-   private ProgressDialog progressDialog;
+    private ProgressDialog progressDialog;
 
     public FireBaseCalls() {
     }
@@ -135,22 +144,22 @@ public  class  FireBaseCalls {
             final Item item = new Item(description,size,price,profile_pic_path);
             databaseReference.child("users").child(user.getUid()).child("country").addValueEventListener(new ValueEventListener() {
 
-                    @Override
+                @Override
                 public void onDataChange(DataSnapshot snapshot) {
                     country[0] = (String) snapshot.getValue();
-                   // DatabaseReference x = databaseReference.child("items").child(user.getUid()).push();
-                        DatabaseReference x = databaseReference.child("items").push();
-                        x.setValue(item);
+                    // DatabaseReference x = databaseReference.child("items").child(user.getUid()).push();
+                    DatabaseReference x = databaseReference.child("items").push();
+                    x.setValue(item);
                     String key = x.getKey();
                     HashMap<String, Object> result = new HashMap<>();
                     result.put("item_id", key);
                     result.put("country", country[0]);
-                        result.put("userId",user.getUid());
+                    result.put("userId",user.getUid());
                     x.updateChildren(result);
 
                     progressDialog.dismiss();
                     Toast.makeText(Activity, "Item saved", Toast.LENGTH_SHORT).show();
-                        Activity.finish();
+                    Activity.finish();
                 }
 
                 @Override

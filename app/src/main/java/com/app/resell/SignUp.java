@@ -235,7 +235,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     profile_pic_path = taskSnapshot.getDownloadUrl()+"";
-                    FireBaseCalls. fireBaseRegistration( editTextEmail,editTextPassword,age, Name,mobile, gender,country,profile_pic_path,getApplicationContext(),false,Activity);
+                    FireBaseCalls.fireBaseRegistration( editTextEmail,editTextPassword,age, Name,mobile, gender,country,profile_pic_path,getApplicationContext(),false,Activity);
                 }
             });
 
