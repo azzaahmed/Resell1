@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.app.resell.Data.FireBaseCallsTemp;
+import com.app.resell.Data.FireBaseCalls;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -54,7 +54,7 @@ public class AddItem extends AppCompatActivity implements View.OnClickListener {
     Bitmap bitmap;
 
     private ProgressDialog progressDialog;
-    private FireBaseCallsTemp FireBaseCallsTemp;
+    private FireBaseCalls FireBaseCalls;
     Activity activity;
 
     @Override
@@ -74,7 +74,7 @@ public class AddItem extends AppCompatActivity implements View.OnClickListener {
         sizeLayout = (TextInputLayout) findViewById(R.id.sizeLayout);
 
         progressDialog = new ProgressDialog(this);
-        FireBaseCallsTemp = new FireBaseCallsTemp();
+        FireBaseCalls = new FireBaseCalls();
 
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,7 +155,7 @@ public class AddItem extends AppCompatActivity implements View.OnClickListener {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     profilePicPath = taskSnapshot.getDownloadUrl() + "";
                     progressDialog.dismiss();
-                    FireBaseCallsTemp.addItem(description.getText().toString().trim(), price.getText().toString().trim(), size.getText().toString().trim(), profilePicPath, getApplicationContext(), AddItem.this);
+                    FireBaseCalls.addItem(description.getText().toString().trim(), price.getText().toString().trim(), size.getText().toString().trim(), profilePicPath, getApplicationContext(), AddItem.this);
 
                 }
             });
