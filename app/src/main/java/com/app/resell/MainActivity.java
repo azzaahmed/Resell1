@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         if (extras != null) {
             Log.d(TAG, "in extra and " + mGoogleApiClient.isConnected());
 
-            String SignOutFlag = extras.getString("SignOut_flag");
+            String SignOutFlag = extras.getString("SignOut_flag","false");
             if (SignOutFlag.equals("true"))
                 mGoogleApiClient.connect();
         }
@@ -377,7 +377,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         Log.d(TAG, "onConnect ");
 
         if (extras != null) {
-            String SignOut_flag = extras.getString("SignOut_flag");
+            String SignOut_flag = extras.getString("SignOut_flag","false");
             if (SignOut_flag.equals("true")) {
                 Log.d(TAG, "onConnect and if flag true  ");
                 signOut();
@@ -523,7 +523,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     public Loader onCreateLoader(int id, Bundle args) {
 
         //url of welcome image that is loaded when you first install the app
-        final String URL = "https://drive.google.com/uc?id=0Bx2A07u8aRxSbG1Dc1NJNmpTRzA";
+        final String URL = "https://drive.google.com/uc?id=0Bx2A07u8aRxSNmFueUZoNUdScnM";
 
         return new AsyncTaskLoader<Bitmap>(this) {
             Bitmap mBitmap = null;
