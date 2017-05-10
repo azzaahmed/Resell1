@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.app.resell">
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+    <uses-permission android:name="android.Manifest.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+          >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SignUp"
+            android:label="@string/title_activity_sign_up"
+           >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".Home"
+            android:label="@string/title_activity_home"
+           />
+        <activity
+            android:name=".editProfile"
+            android:label="@string/title_activity_edit_profile"
+          />
+        <activity
+            android:name=".Profile"
+            android:label="@string/title_activity_profile"
+           >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".Home" />
+        </activity>
+        <activity
+            android:name=".AddItem"
+            android:label="@string/title_activity_add_item"
+          >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Home" />
+        </activity>
+        <activity
+            android:name=".itemDetails"
+            android:label="@string/title_activity_item_details"
+           >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".Home" />
+          </activity>
+
+        <activity
+            android:name=".myItems"
+            android:label="@string/title_activity_my_items"
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Profile" />
+        </activity>
+
+
+        <!--detail widget-->
+        <service
+            android:name=".Data.ItemIntentService"
+            android:exported="false" />
+        <service
+            android:name=".Data.ItemJobService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver
+            android:name=".Widget.ResellAppWidget"
+            android:label="@string/title_widget_detail"
+            android:enabled="@bool/widget_enabled" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.app.resell.ACTION_DATA_UPDATED" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/resell_app_widget_info" />
+        </receiver>
+        <service
+            android:name=".Widget.WidgetRemoteViewsService"
+            android:enabled="@bool/widget_enabled"
+            android:exported="false"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+
+
+</application>
+
+</manifest>
