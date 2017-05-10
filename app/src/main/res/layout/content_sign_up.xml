@@ -46,6 +46,7 @@
                     android:layout_height="60dp"
                     android:src="@drawable/camera"
                     app:border_color="#E82125"
+                    android:contentDescription="@string/upload_image"
                     android:layout_gravity="center_vertical"
                     android:layout_marginStart="120dp" />
             </LinearLayout>

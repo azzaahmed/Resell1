@@ -57,6 +57,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/pencil"
         app:layout_anchor="@id/app_bar"
+        android:contentDescription="@string/edit_profile_fab"
         app:backgroundTint="@color/colorPrimary"
         app:layout_anchorGravity="bottom|end" />
 

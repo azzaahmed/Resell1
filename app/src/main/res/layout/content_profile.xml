@@ -27,6 +27,7 @@
                 app:border_color="#FF000000"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="130dp"
+                android:contentDescription="@string/upload_image"
                 android:visibility="gone" />
         </LinearLayout>
 

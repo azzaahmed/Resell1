@@ -37,5 +37,9 @@
     <string name="title_widget_detail">Resell</string>
     <string name="empty_resell_list">emty list</string>
     <string name="edit_profile">edit profile</string>
+    <string name="add_item_fab">add item</string>
+    <string name="edit_profile_fab">edit profile</string>
+    <string name="upload_image">upload image</string>
+    <string name="profile_image">profile image</string>
 
 </resources>
