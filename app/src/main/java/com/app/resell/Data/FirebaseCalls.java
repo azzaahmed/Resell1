@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.app.resell.Account;
 import com.app.resell.Home;
 import com.app.resell.Item;
+import com.app.resell.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -52,7 +53,7 @@ public class FireBaseCalls {
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
         progressDialog = new ProgressDialog(activity);
-        progressDialog.setMessage("Registering Please Wait...");
+        progressDialog.setMessage(activity.getResources().getString(R.string.Registration_wait));
         progressDialog.show();
 
         final String email = editTextEmail.getText().toString().trim();
@@ -84,9 +85,9 @@ public class FireBaseCalls {
                             result.put("id", key);
                             x.updateChildren(result);
 
-                            Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,activity.getResources().getString(R.string.Registration_success) , Toast.LENGTH_SHORT).show();
                             Bundle myBundle = new Bundle();
-                            myBundle.putSerializable("accountinfo", (Serializable) myAccount);
+                            myBundle.putSerializable(activity.getResources().getString(R.string.acount_info), (Serializable) myAccount);
                             Intent myIntent = new Intent(activity, Home.class);
                             myIntent.putExtras(myBundle);
                             activity.finish();
@@ -95,7 +96,7 @@ public class FireBaseCalls {
 
                         } else {
                             //display some message here
-                            Toast.makeText(context, "Account already exists", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context,activity.getResources().getString(R.string.acount_exists), Toast.LENGTH_LONG).show();
 
                         }
                         progressDialog.dismiss();
@@ -131,7 +132,7 @@ public class FireBaseCalls {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         user = firebaseAuth.getCurrentUser();
         progressDialog = new ProgressDialog(activity);
-        progressDialog.setMessage("Registering Please Wait...");
+        progressDialog.setMessage(activity.getResources().getString(R.string.Registration_item_wait));
         progressDialog.show();
         final String[] country = new String[1];
         if (user != null) {
@@ -152,7 +153,7 @@ public class FireBaseCalls {
                     x.updateChildren(result);
 
                     progressDialog.dismiss();
-                    Toast.makeText(activity, "Item saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, activity.getResources().getString(R.string.item_saved), Toast.LENGTH_SHORT).show();
                     activity.finish();
                 }
 

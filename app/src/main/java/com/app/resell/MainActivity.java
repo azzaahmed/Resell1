@@ -242,7 +242,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 Log.v(TAG, "not first run");
 
             }
-        } else Toast.makeText(this, "no internet connection", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this,this.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
         firebaseAuth.addAuthStateListener(mAuthListener);
 
     }
@@ -412,7 +412,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithCredential", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                            Toast.makeText(MainActivity.this, getApplicationContext().getResources().getString(R.string.auth_failed),
                                     Toast.LENGTH_SHORT).show();
                         }
 
@@ -442,19 +442,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         //checking if email and passwords are empty
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Please enter your email", Toast.LENGTH_LONG).show();
+            Toast.makeText(this,this.getResources().getString(R.string.enter_email) , Toast.LENGTH_LONG).show();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please enter your password", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, this.getResources().getString(R.string.enter_password), Toast.LENGTH_LONG).show();
             return;
         }
 
         //if the email and password are not empty
         //displaying a progress dialog
 
-        progressDialog.setMessage("Please Wait...");
+        progressDialog.setMessage( this.getResources().getString(R.string.Loading));
         progressDialog.show();
 
         //logging in the user
@@ -469,7 +469,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                             finish();
 
                         } else {
-                            Toast.makeText(MainActivity.this, "wrong username or password", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, getApplicationContext().getResources().getString(R.string.wrong_user_pass), Toast.LENGTH_LONG).show();
                         }
                     }
                 });

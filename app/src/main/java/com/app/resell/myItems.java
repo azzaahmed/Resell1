@@ -67,7 +67,7 @@ public class MyItems extends AppCompatActivity {
 
         if (Utility.isOnline(this))
             getMyItems();
-        else Toast.makeText(this, "no internet connection", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(this,this.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
 
     }
 

@@ -67,7 +67,7 @@ public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.MyViewHold
 
         if (Utility.isOnline(activity))
             delete(holder, position);
-        else Toast.makeText(activity, "no internet connection", Toast.LENGTH_LONG).show();
+        else Toast.makeText(activity,activity.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
 
         // Here you apply the animation of item when the view is bound
         setAnimation(holder.itemView, position);
@@ -95,10 +95,9 @@ public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.MyViewHold
                         x.removeValue();
 
 
-                        Toast toast = Toast.makeText(activity, "Item is deleted", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(activity,activity.getResources().getString(R.string.delete_item) , Toast.LENGTH_SHORT);
                         toast.show();
-//                        Intent intent = new Intent( ActiveListDetailsActivity.this,myOfferedPosts.class);
-//                        startActivity(intent);
+
 
                         break;
 

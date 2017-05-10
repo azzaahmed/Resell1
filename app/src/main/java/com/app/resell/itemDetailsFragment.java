@@ -79,7 +79,7 @@ public class ItemDetailsFragment extends Fragment {
                 Log.v(TAG, "clicked item null");
 
             }
-        } else Toast.makeText(getContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(getContext(), this.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
         return view;
     }
 

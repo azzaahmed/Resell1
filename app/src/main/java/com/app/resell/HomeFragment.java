@@ -37,7 +37,7 @@ public class HomeFragment extends Fragment {
 
         progress = new ProgressDialog(getActivity());
         if (Utility.isOnline(getActivity())) {
-            progress.setMessage("loading.....");
+            progress.setMessage(this.getResources().getString(R.string.loading));
             progress.show();
             progress.setCancelable(false);
         }
@@ -74,7 +74,7 @@ public class HomeFragment extends Fragment {
 
 
         } else {
-            Toast.makeText(getContext(), "no internet connection", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), this.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
         }
 
         return view;

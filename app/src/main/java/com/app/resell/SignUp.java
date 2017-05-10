@@ -175,7 +175,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 FireBaseCalls.fireBaseRegistration(editTextEmail, editTextPassword, age, Name, mobile, gender, country, " ", getApplicationContext(), true, Activity);
 
             }
-        } else Toast.makeText(this, "no internet connection", Toast.LENGTH_LONG).show();
+        } else Toast.makeText(this,this.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
     }
 
     // image upload
@@ -214,7 +214,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     public void uploadImage() {
 
-        progressDialog.setMessage("Registering Please Wait...");
+        progressDialog.setMessage(this.getResources().getString(R.string.Registration_item_wait));
         progressDialog.show();
 
         if (imageUri != null) {
@@ -230,7 +230,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
                     progressDialog.dismiss();
-                    Toast.makeText(SignUp.this, "Can't upload your image ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SignUp.this, getApplicationContext().getResources().getString(R.string.upload_image_fail), Toast.LENGTH_LONG).show();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override

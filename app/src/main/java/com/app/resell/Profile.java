@@ -131,7 +131,7 @@ public class Profile extends AppCompatActivity {
             progress.setMessage("Loading.....");
             progress.show();
             progress.setCancelable(false);
-        } else Toast.makeText(this, "no internet connection", Toast.LENGTH_LONG).show();
+        } else Toast.makeText(this,this.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
 
         mobileLayout = (RelativeLayout) findViewById(R.id.mobilelayout);
 
@@ -198,7 +198,7 @@ public class Profile extends AppCompatActivity {
                                 profileImageEdit.setVisibility(View.VISIBLE);
                             } else if (!
                                     Utility.isOnline(Activity))
-                                Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(),getApplicationContext().getResources().getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                         } else {
 
                             if (Utility.isOnline(Activity)) {
@@ -212,7 +212,7 @@ public class Profile extends AppCompatActivity {
                                 profileImageEdit.setVisibility(View.GONE);
 
                             } else
-                                Toast.makeText(getApplicationContext(), "no internet connection", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), getApplicationContext().getResources().getString(R.string.no_internet_connection), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -343,11 +343,11 @@ public class Profile extends AppCompatActivity {
         RelativeLayout countryLayout = (RelativeLayout) findViewById(R.id.countryLayout);
         RelativeLayout mobileLayout = (RelativeLayout) findViewById(R.id.mobilelayout);
 
-        RelativeLayout editageLayout = (RelativeLayout) findViewById(R.id.editagelayout);
-        RelativeLayout editemailLayout = (RelativeLayout) findViewById(R.id.emaillayoutedit);
-        RelativeLayout editgenderLayout = (RelativeLayout) findViewById(R.id.editgenderlayout);
+        RelativeLayout editAgeLayout = (RelativeLayout) findViewById(R.id.editagelayout);
+        RelativeLayout editEmailLayout = (RelativeLayout) findViewById(R.id.emaillayoutedit);
+        RelativeLayout editGenderLayout = (RelativeLayout) findViewById(R.id.editgenderlayout);
         RelativeLayout editCountryLayout = (RelativeLayout) findViewById(R.id.editCountrylayout);
-        RelativeLayout editmobileLayout = (RelativeLayout) findViewById(R.id.editmobilelayout);
+        RelativeLayout editMobileLayout = (RelativeLayout) findViewById(R.id.editmobilelayout);
 
         View dividerAfterName = findViewById(R.id.dividerAfterName);
         dividerAfterName.setVisibility(View.VISIBLE);
@@ -362,10 +362,10 @@ public class Profile extends AppCompatActivity {
         namelayout.setVisibility(View.VISIBLE);
 
 
-        editageLayout.setVisibility(View.VISIBLE);
-        editemailLayout.setVisibility(View.GONE);
-        editmobileLayout.setVisibility(View.VISIBLE);
-        editgenderLayout.setVisibility(View.VISIBLE);
+        editAgeLayout.setVisibility(View.VISIBLE);
+        editEmailLayout.setVisibility(View.GONE);
+        editMobileLayout.setVisibility(View.VISIBLE);
+        editGenderLayout.setVisibility(View.VISIBLE);
         editCountryLayout.setVisibility(View.VISIBLE);
 
         nameEdit.setHint(myAccount.getName());
@@ -399,30 +399,30 @@ public class Profile extends AppCompatActivity {
 
         } else {
             if (TextUtils.isEmpty(mEmail)) {
-                Toast.makeText(this, "Please enter your email", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,this.getResources().getString(R.string.enter_email) , Toast.LENGTH_LONG).show();
                 return;
             }
             if (TextUtils.isEmpty(mAge)) {
-                Toast.makeText(this, "Please enter your age", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,this.getResources().getString(R.string.enter_age), Toast.LENGTH_LONG).show();
                 return;
 
             }
             if (TextUtils.isEmpty(mMobile)) {
-                Toast.makeText(this, "Please enter your mobile number", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getResources().getString(R.string.enter_mobile), Toast.LENGTH_LONG).show();
                 return;
 
             }
             if (TextUtils.isEmpty(mGender)) {
-                Toast.makeText(this, "Please enter your gender", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getResources().getString(R.string.enter_gender), Toast.LENGTH_LONG).show();
                 return;
 
             }
             if (TextUtils.isEmpty(mCountry)) {
-                Toast.makeText(this, "Please enter your country", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getResources().getString(R.string.enter_country), Toast.LENGTH_LONG).show();
                 return;
             }
             if (TextUtils.isEmpty(mName) && user.getDisplayName() == null) {
-                Toast.makeText(this, "Please enter your name", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getResources().getString(R.string.enter_name), Toast.LENGTH_LONG).show();
                 return;
 
             } else if (user.getDisplayName() != null) mName = user.getDisplayName();
@@ -433,23 +433,23 @@ public class Profile extends AppCompatActivity {
             if (profilePicAttached) {
                 UploadImage();
             } else {
-                firebasedit(false);
+                fireBaseEdit(false);
             }
         }
     }
 
-    public void returnprofileView() {
+    public void returnProfileView() {
         RelativeLayout ageLayout = (RelativeLayout) findViewById(R.id.agelayout);
         RelativeLayout emailLayout = (RelativeLayout) findViewById(R.id.emaillayout);
         RelativeLayout genderLayout = (RelativeLayout) findViewById(R.id.genderlayout);
         RelativeLayout countryLayout = (RelativeLayout) findViewById(R.id.countryLayout);
         RelativeLayout mobileLayout = (RelativeLayout) findViewById(R.id.mobilelayout);
 
-        RelativeLayout editageLayout = (RelativeLayout) findViewById(R.id.editagelayout);
-        RelativeLayout editemailLayout = (RelativeLayout) findViewById(R.id.emaillayoutedit);
-        RelativeLayout editgenderLayout = (RelativeLayout) findViewById(R.id.editgenderlayout);
+        RelativeLayout editAgeLayout = (RelativeLayout) findViewById(R.id.editagelayout);
+        RelativeLayout editEmailLayout = (RelativeLayout) findViewById(R.id.emaillayoutedit);
+        RelativeLayout editGenderLayout = (RelativeLayout) findViewById(R.id.editgenderlayout);
         RelativeLayout editCountryLayout = (RelativeLayout) findViewById(R.id.editCountrylayout);
-        RelativeLayout editmobileLayout = (RelativeLayout) findViewById(R.id.editmobilelayout);
+        RelativeLayout editMobileLayout = (RelativeLayout) findViewById(R.id.editmobilelayout);
         View dividerAfterName = findViewById(R.id.dividerAfterName);
         dividerAfterName.setVisibility(View.GONE);
 
@@ -459,14 +459,14 @@ public class Profile extends AppCompatActivity {
         mobileLayout.setVisibility(View.VISIBLE);
         countryLayout.setVisibility(View.VISIBLE);
 
-        RelativeLayout namelayout = (RelativeLayout) findViewById(R.id.namelayout);
-        namelayout.setVisibility(View.GONE);
+        RelativeLayout nameLayout = (RelativeLayout) findViewById(R.id.namelayout);
+        nameLayout.setVisibility(View.GONE);
 
 
-        editageLayout.setVisibility(View.GONE);
-        editemailLayout.setVisibility(View.GONE);
-        editmobileLayout.setVisibility(View.GONE);
-        editgenderLayout.setVisibility(View.GONE);
+        editAgeLayout.setVisibility(View.GONE);
+        editEmailLayout.setVisibility(View.GONE);
+        editMobileLayout.setVisibility(View.GONE);
+        editGenderLayout.setVisibility(View.GONE);
         editCountryLayout.setVisibility(View.GONE);
     }
 
@@ -504,7 +504,7 @@ public class Profile extends AppCompatActivity {
 
     public void UploadImage() throws IOException {
 
-        progress.setMessage("Updating Please Wait...");
+        progress.setMessage(this.getResources().getString(R.string.updating));
         progress.show();
 
         if (imageUri != null) {
@@ -519,14 +519,14 @@ public class Profile extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
                     progress.dismiss();
-                    Toast.makeText(Profile.this, "Can't upload your image ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Profile.this, getApplicationContext().getResources().getString(R.string.upload_image_fail), Toast.LENGTH_LONG).show();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                     profilePicPath = taskSnapshot.getDownloadUrl() + "";
-                    firebasedit(true);
+                    fireBaseEdit(true);
                 }
             });
 
@@ -534,7 +534,7 @@ public class Profile extends AppCompatActivity {
     }
 
 
-    public void firebasedit(boolean withImage) {
+    public void fireBaseEdit(boolean withImage) {
         Account myaccount;
 
         if (withImage)
@@ -555,7 +555,7 @@ public class Profile extends AppCompatActivity {
 
         progress.dismiss();
 
-        returnprofileView();
+        returnProfileView();
 
 
     }

@@ -2,7 +2,6 @@ package com.app.resell;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -40,7 +39,6 @@ public class EditProfile extends AppCompatActivity {
     FirebaseUser user;
 
     //select country
-    private TextInputLayout input_layout_country;
     private EditText countryEditTextFrom;
     private CountryPicker mCountryPicker;
     private ImageView mCountryFlagImageViewFrom;
@@ -58,7 +56,7 @@ public class EditProfile extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         Intent intent = getIntent();
-        account = (Account) intent.getSerializableExtra("accountinfo");
+        account = (Account) intent.getSerializableExtra( this.getResources().getString(R.string.acount_info));
 
         age = (EditText) findViewById(R.id.age);
         gender = (Spinner) findViewById(R.id.gender);
@@ -70,7 +68,7 @@ public class EditProfile extends AppCompatActivity {
         //select country
         countryEditTextFrom = (EditText) findViewById(R.id.pick_country_from);
         mCountryFlagImageViewFrom = (ImageView) findViewById(R.id.row_icon_from);
-        mCountryPicker = CountryPicker.newInstance("Select Country");
+        mCountryPicker = CountryPicker.newInstance(this.getResources().getString(R.string.select_country));
         setListener();
     }
 
@@ -94,27 +92,27 @@ public class EditProfile extends AppCompatActivity {
         } else {
 
             if (TextUtils.isEmpty(mGender)) {
-                Toast.makeText(this, "Please enter your gender", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getResources().getString(R.string.enter_gender), Toast.LENGTH_LONG).show();
                 return;
 
             }
             if (TextUtils.isEmpty(mAge)) {
-                Toast.makeText(this, "Please enter your age", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,this.getResources().getString(R.string.enter_age) , Toast.LENGTH_LONG).show();
                 return;
 
             }
             if (TextUtils.isEmpty(mMobile)) {
-                Toast.makeText(this, "Please enter your mobile number", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,this.getResources().getString(R.string.enter_mobile), Toast.LENGTH_LONG).show();
                 return;
 
             }
             if (mGender.equals("Gender")) {
-                Toast.makeText(this, "Please enter your Gender", Toast.LENGTH_LONG).show();
+                Toast.makeText(this,this.getResources().getString(R.string.enter_gender), Toast.LENGTH_LONG).show();
                 return;
             }
 
             if (TextUtils.isEmpty(countryEditTextFrom.getText().toString().trim())) {
-                Toast.makeText(this, "Please enter your country", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, this.getResources().getString(R.string.enter_country), Toast.LENGTH_LONG).show();
                 return;
 
             }
@@ -123,7 +121,7 @@ public class EditProfile extends AppCompatActivity {
 
         if (Utility.isOnline(this))
             FireBaseCalls.addFireBaseExtraInfo(user.getDisplayName(), mAge, mMobile, mGender, user.getEmail(), user.getPhotoUrl() + "", this, country);
-        else Toast.makeText(this, "no internet connection", Toast.LENGTH_LONG).show();
+        else Toast.makeText(this,this.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
 
     }
 

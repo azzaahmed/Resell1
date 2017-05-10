@@ -85,7 +85,7 @@ public class AddItem extends AppCompatActivity implements View.OnClickListener {
                         uploadImage();
                     }
                 } else {
-                    Toast toast = Toast.makeText(AddItem.this, "Please check your Internet connection !", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(AddItem.this,  activity.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -133,7 +133,7 @@ public class AddItem extends AppCompatActivity implements View.OnClickListener {
 
     public void uploadImage() {
 
-        progressDialog.setMessage(" Please Wait...");
+        progressDialog.setMessage(activity.getResources().getString(R.string.Loading));
         progressDialog.show();
 
         if (imageUri != null) {
@@ -148,7 +148,7 @@ public class AddItem extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
                     progressDialog.dismiss();
-                    Toast.makeText(AddItem.this, "Can't upload your image ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddItem.this, activity.getResources().getString(R.string.upload_image_fail), Toast.LENGTH_LONG).show();
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -183,7 +183,7 @@ public class AddItem extends AppCompatActivity implements View.OnClickListener {
         int check = 0;
 
         if (price.getText().toString().trim().isEmpty()) {
-            priceLayout.setError("please enter price");
+            priceLayout.setError(this.getResources().getString(R.string.enter_price));
             requestFocus(price);
             check++;
         } else {
@@ -191,7 +191,7 @@ public class AddItem extends AppCompatActivity implements View.OnClickListener {
 
         }
         if (size.getText().toString().trim().isEmpty()) {
-            sizeLayout.setError("please enter size");
+            sizeLayout.setError(this.getResources().getString(R.string.enter_size));
             requestFocus(size);
             check++;
         } else {
@@ -199,7 +199,7 @@ public class AddItem extends AppCompatActivity implements View.OnClickListener {
 
         }
         if (imageUri == null) {
-            Toast.makeText(getApplicationContext(), "Upload item image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), this.getResources().getString(R.string.upload_image), Toast.LENGTH_SHORT).show();
             check++;
         }
         return check == 0;
