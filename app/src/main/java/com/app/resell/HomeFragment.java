@@ -14,6 +14,8 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -26,7 +28,7 @@ public class HomeFragment extends Fragment {
     private ItemsAdapter imageAdapter;
     public static ProgressDialog progress;
     Firebase itemListsRef = null;
-
+     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     public HomeFragment() {
     }
 
@@ -52,8 +54,10 @@ public class HomeFragment extends Fragment {
                 Log.d(TAG, "check reference is null empty items");
                 progress.dismiss();
             }
-
-            imageAdapter = new ItemsAdapter(getActivity(), Item.class, R.layout.image_item, itemListsRef);
+            if (databaseReference.child("items") == null) {
+              progress.dismiss();
+            }
+            imageAdapter = new ItemsAdapter(getActivity(), Item.class, R.layout.image_item, databaseReference.child("items"));
 
             gridview.setAdapter(imageAdapter);
 
