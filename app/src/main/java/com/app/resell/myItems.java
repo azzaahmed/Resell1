@@ -22,13 +22,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class myItems extends AppCompatActivity {
+public class MyItems extends AppCompatActivity {
     private static final String TAG = "myItems";
     private ArrayList<Item> itemsList = new ArrayList<>();
-    private FirebaseUser currentUser ;
+    private FirebaseUser currentUser;
     ProgressDialog progress;
     private RecyclerView recyclerView;
-    private myItemAdapter mAdapter;
+    private MyItemAdapter mAdapter;
 
 
     @Override
@@ -40,13 +40,13 @@ public class myItems extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         progress = new ProgressDialog(this);
-        if(Utility.isOnline(this)) {
+        if (Utility.isOnline(this)) {
             progress.setMessage("loading.....");
             progress.show();
             progress.setCancelable(false);
         }
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mAdapter = new myItemAdapter(itemsList,this);
+        mAdapter = new MyItemAdapter(itemsList, this);
         recyclerView.setHasFixedSize(true);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this.getApplicationContext());
@@ -56,18 +56,17 @@ public class myItems extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
 
 
+        recyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
 
-       recyclerView.addOnItemTouchListener(
-               new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
-                   @Override
-                   public void onItemClick(View view, int position) {
+                    }
+                })
+        );
 
-                   }
-               })
-       );
-
-if(Utility.isOnline(this))
-          getMyItems();
+        if (Utility.isOnline(this))
+            getMyItems();
         else Toast.makeText(this, "no internet connection", Toast.LENGTH_SHORT).show();
 
     }
@@ -79,39 +78,39 @@ if(Utility.isOnline(this))
     }
 
 
-public void getMyItems(){
+    public void getMyItems() {
 
-    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-    currentUser= firebaseAuth.getCurrentUser();
-    databaseReference.child("items").addValueEventListener(new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot snapshot) {
-            itemsList.clear();
-            Log.e("Count ", "" + snapshot.getChildrenCount());
-            for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                Item item = postSnapshot.getValue(Item.class);
-                Log.e("Get Data", item.getDescription());
-            if(currentUser!=null&&item.getUserId()!=null)
-                if (item.getUserId().equals(currentUser.getUid())) {
-                    itemsList.add(item);
-                    Log.d(TAG, "item id " + item.getItem_id());
+        final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+        databaseReference.child("items").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                itemsList.clear();
+                Log.e("Count ", "" + snapshot.getChildrenCount());
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Item item = postSnapshot.getValue(Item.class);
+                    Log.e("Get Data", item.getDescription());
+                    if (currentUser != null && item.getUserId() != null)
+                        if (item.getUserId().equals(currentUser.getUid())) {
+                            itemsList.add(item);
+                            Log.d(TAG, "item id " + item.getItem_id());
 
-                    mAdapter.notifyDataSetChanged();
-                    progress.dismiss();
+                            mAdapter.notifyDataSetChanged();
+                            progress.dismiss();
+                        }
                 }
+                progress.dismiss();
             }
-            progress.dismiss();
-        }
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
-            Log.e("The read failed: ", databaseError.getMessage());
-        }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("The read failed: ", databaseError.getMessage());
+            }
 
 
-    });
+        });
 
-}
+    }
 
 }

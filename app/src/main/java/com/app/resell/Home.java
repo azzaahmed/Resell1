@@ -35,6 +35,7 @@ public class Home extends AppCompatActivity {
         FetchItems.syncImmediately(this);
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -52,22 +53,18 @@ public class Home extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
-
-        else if (id == R.id.action_signOut) {
+        } else if (id == R.id.action_signOut) {
             firebaseAuth.signOut();
             Intent intent = new Intent(getApplicationContext(), MainActivity.class).putExtra("SignOut_flag", "true");
 
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
-        }
-        else if (id == R.id.action_profile) {
+        } else if (id == R.id.action_profile) {
             startActivity(new Intent(getApplicationContext(), Profile.class));
+        } else if (id == R.id.action_myitems) {
+            startActivity(new Intent(getApplicationContext(), MyItems.class));
         }
-        else if(id==R.id.action_myitems){
-            startActivity(new Intent(getApplicationContext(), myItems.class));
-        }
-            return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
 
     }
 
@@ -75,9 +72,6 @@ public class Home extends AppCompatActivity {
     public void onBackPressed() {
         finish();
     }
-
-
-
 
 
 }

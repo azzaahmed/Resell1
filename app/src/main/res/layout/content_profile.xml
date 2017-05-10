@@ -18,6 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_imageedit"
                 android:layout_width="66dp"
@@ -26,7 +27,7 @@
                 app:border_color="#FF000000"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="130dp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
 
         <RelativeLayout
@@ -44,8 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@drawable/account"
-                />
+                android:src="@drawable/account" />
 
             <EditText
                 android:id="@+id/nameE"
@@ -54,8 +54,7 @@
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_toEndOf="@id/ivContactItem0"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#212121"
-                />
+                android:textColor="#212121" />
 
 
             <TextView
@@ -71,6 +70,7 @@
 
 
         </RelativeLayout>
+
         <View
             android:id="@+id/dividerAfterName"
             android:visibility="gone"
@@ -80,12 +80,13 @@
             android:layout_marginStart="64dp"
             android:layout_marginTop="8dp"
             android:background="#B6B6B6" />
+
         <RelativeLayout
             android:id="@+id/mobilelayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autoLink="phone"
-            android:linksClickable = "true"
+            android:linksClickable="true"
             android:background="?attr/selectableItemBackground"
             android:padding="@dimen/activity_horizontal_margin">
 
@@ -129,6 +130,7 @@
             android:background="?attr/selectableItemBackground"
             android:visibility="gone"
             android:padding="@dimen/activity_horizontal_margin">
+
             <ImageView
                 android:id="@+id/ivContactItem1e"
                 android:layout_width="wrap_content"
@@ -136,25 +138,27 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:src="@drawable/ic_phone_black" />
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/InputLayoutMobileEdit"
                 android:layout_width="match_parent"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_toEndOf="@id/ivContactItem1e"
-                android:layout_height="wrap_content"
-                >
-            <EditText
-                android:id="@+id/mobileE"
-                android:maxLength="11"
-                android:inputType="number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/ivContactItem1e"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#212121"
+                android:layout_height="wrap_content">
 
-                />
-          </android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:id="@+id/mobileE"
+                    android:maxLength="11"
+                    android:inputType="number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/ivContactItem1e"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#212121"
+
+                    />
+            </android.support.design.widget.TextInputLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -168,7 +172,9 @@
 
 
         </RelativeLayout>
+
         <include layout="@layout/item_divider" />
+
         <RelativeLayout
             android:id="@+id/emaillayout"
             android:layout_width="match_parent"
@@ -208,6 +214,7 @@
                 android:textColor="#727272" />
 
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/emaillayoutedit"
             android:layout_width="match_parent"
@@ -233,8 +240,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#212121"
-                />
+                android:textColor="#212121" />
 
 
             <TextView
@@ -249,13 +255,10 @@
                 android:textColor="#727272" />
 
 
-
         </RelativeLayout>
 
 
-
         <include layout="@layout/item_divider" />
-
 
 
         <RelativeLayout
@@ -271,8 +274,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@drawable/gender_female"
-                />
+                android:src="@drawable/gender_female" />
 
             <TextView
                 android:id="@+id/Gender"
@@ -316,8 +318,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:src="@drawable/gender_female"
-                />
+                android:src="@drawable/gender_female" />
 
 
             <Spinner
@@ -332,7 +333,7 @@
                 android:textColor="#212121"
                 android:entries="@array/GenderSelect"
                 android:prompt="@string/Gender"
-                android:overlapAnchor="false"/>
+                android:overlapAnchor="false" />
 
 
             <TextView
@@ -351,6 +352,7 @@
         </RelativeLayout>
 
         <include layout="@layout/item_divider" />
+
         <RelativeLayout
             android:id="@+id/agelayout"
             android:layout_width="match_parent"
@@ -395,6 +397,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="#727272" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/editagelayout"
             android:layout_width="match_parent"
@@ -410,27 +413,27 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:src="@drawable/calendar" />
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/InputLayoutAgeEdit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_toEndOf="@id/ivContactItem7e"
-                >
-            <EditText
-                android:maxLength="2"
-                android:inputType="number"
-                android:id="@+id/ageE"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-               android:layout_toEndOf="@id/ivContactItem7e"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="#212121"
-                />
+                android:layout_toEndOf="@id/ivContactItem7e">
 
-</android.support.design.widget.TextInputLayout>
+                <EditText
+                    android:maxLength="2"
+                    android:inputType="number"
+                    android:id="@+id/ageE"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/ivContactItem7e"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="#212121" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -444,7 +447,9 @@
                 android:textColor="#727272" />
 
         </RelativeLayout>
+
         <include layout="@layout/item_divider" />
+
         <RelativeLayout
             android:id="@+id/countryLayout"
             android:layout_width="match_parent"
@@ -459,7 +464,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:src="@drawable/google_maps_b"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+                android:layout_marginEnd="@dimen/activity_horizontal_margin" />
 
             <TextView
                 android:id="@+id/country"
@@ -512,8 +517,7 @@
                 android:layout_height="wrap_content"
                 android:paddingRight="16dp"
                 android:paddingLeft="16dp"
-                android:layout_toEndOf="@id/row_icon_frome"
-               >
+                android:layout_toEndOf="@id/row_icon_frome">
 
                 <EditText
                     android:id="@+id/pick_country_from"
@@ -523,8 +527,7 @@
                     android:focusable="false"
                     android:focusableInTouchMode="false"
                     android:clickable="true"
-                    android:layout_weight="1"
-                    />
+                    android:layout_weight="1" />
             </android.support.design.widget.TextInputLayout>
 
 
@@ -544,44 +547,6 @@
 
         <include layout="@layout/item_divider" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2"
-            android:visibility="gone"
-            >
-            <Button
-                android:id="@+id/offeredRidesButton"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="OFFERED RIDES"
-                android:textStyle="bold"
-                android:theme="@style/MyButton"
-                android:layout_marginRight="-8dip"
-                />
-
-            <Button
-                android:id="@+id/requestedRidesButton"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:text="REQUESTED RIDES"
-                android:textStyle="bold"
-                android:theme="@style/MyButton"
-
-                />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/edit_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/MyButton"
-            android:text="edit profile"
-            android:visibility="gone"/>
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

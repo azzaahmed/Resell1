@@ -26,7 +26,6 @@ import java.util.ArrayList;
 public class FetchItems {
 
 
-
     public static final String ACTION_DATA_UPDATED = "com.app.resell.ACTION_DATA_UPDATED";
     public static ArrayList<Item> itemsList = new ArrayList<>();
     private static final int INITIAL_BACKOFF = 10000;
@@ -39,7 +38,7 @@ public class FetchItems {
         Log.v("Home", "get widget data");
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        final FirebaseUser currentUser ;
+        final FirebaseUser currentUser;
         currentUser = firebaseAuth.getCurrentUser();
         databaseReference.child("items").addValueEventListener(new ValueEventListener() {
             @Override
@@ -49,7 +48,7 @@ public class FetchItems {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Item item = postSnapshot.getValue(Item.class);
                     Log.e("Get Data", item.getDescription());
-                        itemsList.add(item);
+                    itemsList.add(item);
                 }
 
                 //widget

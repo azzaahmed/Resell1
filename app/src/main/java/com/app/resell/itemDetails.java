@@ -1,6 +1,5 @@
 package com.app.resell;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,14 +17,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class itemDetails extends AppCompatActivity {
+public class ItemDetails extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
 
-        final Activity activity=this;
         final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         postponeEnterTransition();
@@ -57,7 +55,7 @@ public class itemDetails extends AppCompatActivity {
             // Launch sharing dialog for image
             startActivity(Intent.createChooser(shareIntent, "Share Image"));
         } else {
-            Log.e("itemDetails","sharing failed");
+            Log.e("itemDetails", "sharing failed");
         }
     }
 
@@ -66,7 +64,7 @@ public class itemDetails extends AppCompatActivity {
         // Extract Bitmap from ImageView drawable
         Drawable drawable = imageView.getDrawable();
         Bitmap bmp = null;
-        if (drawable instanceof BitmapDrawable){
+        if (drawable instanceof BitmapDrawable) {
             bmp = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
         } else {
             return null;
@@ -75,7 +73,7 @@ public class itemDetails extends AppCompatActivity {
         Uri bmpUri = null;
         try {
 
-            File file =  new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+            File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
             FileOutputStream out = new FileOutputStream(file);
             bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
             out.close();

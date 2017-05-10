@@ -15,7 +15,7 @@ import android.widget.RemoteViews;
 import com.app.resell.Data.FetchItems;
 import com.app.resell.MainActivity;
 import com.app.resell.R;
-import com.app.resell.itemDetails;
+import com.app.resell.ItemDetails;
 
 /**
  * Implementation of App Widget functionality.
@@ -43,7 +43,7 @@ public class ResellAppWidget extends AppWidgetProvider {
             boolean useDetailActivity = context.getResources()
                     .getBoolean(R.bool.use_activity);
             Intent clickIntentTemplate = useDetailActivity
-                    ? new Intent(context, itemDetails.class)
+                    ? new Intent(context, ItemDetails.class)
                     : new Intent(context, MainActivity.class);
 
             PendingIntent clickPendingIntentTemplate = TaskStackBuilder.create(context)

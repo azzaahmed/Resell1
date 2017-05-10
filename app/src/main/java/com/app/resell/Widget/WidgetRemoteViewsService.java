@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by azza ahmed on 5/5/2017.
  */
-public class WidgetRemoteViewsService  extends RemoteViewsService {
+public class WidgetRemoteViewsService extends RemoteViewsService {
     private ArrayList<Item> itemsList = new ArrayList<>();
 //    private FirebaseUser currentUser ;
 
@@ -32,9 +32,9 @@ public class WidgetRemoteViewsService  extends RemoteViewsService {
 
             @Override
             public void onDataSetChanged() {
-              //  getMyItems();
-                itemsList= FetchItems.itemsList;
-                Log.v("widget service","onDataSetChanged");
+                //  getMyItems();
+                itemsList = FetchItems.itemsList;
+                Log.v("widget service", "onDataSetChanged");
             }
 
             @Override
@@ -45,7 +45,7 @@ public class WidgetRemoteViewsService  extends RemoteViewsService {
             @Override
             public int getCount() {
 
-                Log.v("wigdet service",itemsList.size()+"");
+                Log.v("wigdet service", itemsList.size() + "");
                 return itemsList.size();
             }
 
@@ -55,7 +55,7 @@ public class WidgetRemoteViewsService  extends RemoteViewsService {
                         R.layout.widget_list_item);
 
                 String price = itemsList.get(position).getPrice();
-                String imageURL=itemsList.get(position).getImageUrl();
+                String imageURL = itemsList.get(position).getImageUrl();
 
                 views.setTextViewText(R.id.price, price);
 
@@ -63,14 +63,14 @@ public class WidgetRemoteViewsService  extends RemoteViewsService {
 
                 try {
                     URL url = new URL(imageURL);
-                     image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-                } catch(IOException e) {
+                    image = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+                } catch (IOException e) {
                     System.out.println(e);
                 }
 
-                views.setImageViewBitmap(R.id.item_imageview,image);
+                views.setImageViewBitmap(R.id.item_imageview, image);
 
-               Log.v("widget service","item price "+price);
+                Log.v("widget service", "item price " + price);
 
                 final Intent fillInIntent = new Intent();
 
@@ -82,7 +82,7 @@ public class WidgetRemoteViewsService  extends RemoteViewsService {
 
             @Override
             public RemoteViews getLoadingView() {
-                   return new RemoteViews(getPackageName(), R.layout.widget_list_item);
+                return new RemoteViews(getPackageName(), R.layout.widget_list_item);
             }
 
             @Override

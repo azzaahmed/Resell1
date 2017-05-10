@@ -12,7 +12,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Base64;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -30,32 +29,34 @@ import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-public class AddItem extends AppCompatActivity  implements View.OnClickListener {
+
+public class AddItem extends AppCompatActivity implements View.OnClickListener {
 
 
     EditText description;
     EditText price;
     EditText size;
-    Button post_button;
-    TextInputLayout descriptionLayout;
+    Button postButton;
+
     TextInputLayout priceLayout;
     TextInputLayout sizeLayout;
 
     // *********************** upload image ***********************************//
-    private String profile_pic_path;
+    private String profilePicPath;
 
     private Uri imageUri = null;
 
     private StorageReference mStorage;
 
     private static final int GALLERY_REQUEST = 1;
-    private ImageView imageView_circle;
-    boolean profilePic_attached = false;
+    private ImageView imageViewCircle;
+    boolean profilePicAttached = false;
     Bitmap bitmap;
 
     private ProgressDialog progressDialog;
-    private  FireBaseCalls FireBaseCalls;
+    private FireBaseCalls FireBaseCalls;
     Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,40 +65,37 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        activity=this;
-        description=(EditText)findViewById(R.id.description);
-        price=(EditText)findViewById(R.id.price);
-        size=(EditText)findViewById(R.id.size);
-        post_button = (Button) findViewById(R.id.post_button);
-        priceLayout=(TextInputLayout) findViewById(R.id.priceLayout);
-        sizeLayout=(TextInputLayout)findViewById(R.id.sizeLayout);
+        activity = this;
+        description = (EditText) findViewById(R.id.description);
+        price = (EditText) findViewById(R.id.price);
+        size = (EditText) findViewById(R.id.size);
+        postButton = (Button) findViewById(R.id.post_button);
+        priceLayout = (TextInputLayout) findViewById(R.id.priceLayout);
+        sizeLayout = (TextInputLayout) findViewById(R.id.sizeLayout);
 
         progressDialog = new ProgressDialog(this);
-        FireBaseCalls= new FireBaseCalls();
+        FireBaseCalls = new FireBaseCalls();
 
-        post_button.setOnClickListener(new View.OnClickListener() {
+        postButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(Utility.isOnline(activity)) {
-                    if(validForm()) {
-                        UploadImage();
+                if (Utility.isOnline(activity)) {
+                    if (validForm()) {
+                        uploadImage();
                     }
-                }
-                else{
+                } else {
                     Toast toast = Toast.makeText(AddItem.this, "Please check your Internet connection !", Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
         });
 
-        imageView_circle  = (ImageView) findViewById(R.id.buttonChoose);
-        imageView_circle.setOnClickListener(this);
+        imageViewCircle = (ImageView) findViewById(R.id.buttonChoose);
+        imageViewCircle.setOnClickListener(this);
         mStorage = FirebaseStorage.getInstance().getReference();
 
     }
-
-
 
 
     // image upload
@@ -112,7 +110,7 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK){
+        if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
 
             imageUri = data.getData();
             try {
@@ -123,26 +121,25 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        //    imageView_circle.setImageURI(imageUri);
+
             Picasso.with(AddItem.this)
                     .load(imageUri).fit().centerCrop()
-                    .into(imageView_circle);
-            profilePic_attached = true;
+                    .into(imageViewCircle);
+            profilePicAttached = true;
 
         }
 
     }
 
-    public void UploadImage(){
+    public void uploadImage() {
 
         progressDialog.setMessage(" Please Wait...");
         progressDialog.show();
 
-        if(imageUri != null){
+        if (imageUri != null) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG,20, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
             byte[] bytes = baos.toByteArray();
-            String base64Image = Base64.encodeToString(bytes, Base64.DEFAULT);// no need
 
             StorageReference filepath = mStorage.child("UsersImages").child(imageUri.getLastPathSegment());
             UploadTask uploadTask = filepath.putBytes(bytes);
@@ -156,9 +153,9 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener 
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    profile_pic_path = taskSnapshot.getDownloadUrl()+"";
+                    profilePicPath = taskSnapshot.getDownloadUrl() + "";
                     progressDialog.dismiss();
-                    FireBaseCalls.AddItem(description.getText().toString().trim(), price.getText().toString().trim(), size.getText().toString().trim(), profile_pic_path, getApplicationContext(), AddItem.this);
+                    FireBaseCalls.addItem(description.getText().toString().trim(), price.getText().toString().trim(), size.getText().toString().trim(), profilePicPath, getApplicationContext(), AddItem.this);
 
                 }
             });
@@ -181,10 +178,9 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener 
     }
 
 
+    private boolean validForm() {
 
-    private boolean validForm(){
-
-        int check=0;
+        int check = 0;
 
         if (price.getText().toString().trim().isEmpty()) {
             priceLayout.setError("please enter price");
@@ -202,12 +198,13 @@ public class AddItem extends AppCompatActivity  implements View.OnClickListener 
             sizeLayout.setErrorEnabled(false);
 
         }
-        if(imageUri==null){
-            Toast.makeText(getApplicationContext(),"Upload item image",Toast.LENGTH_SHORT).show();
+        if (imageUri == null) {
+            Toast.makeText(getApplicationContext(), "Upload item image", Toast.LENGTH_SHORT).show();
             check++;
         }
         return check == 0;
     }
+
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);

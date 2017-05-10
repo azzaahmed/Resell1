@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.app.resell.itemDetails">
-
+    tools:context=".ItemDetails">
 
 
     <include layout="@layout/content_item_details" />
@@ -21,7 +20,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_share"
         android:contentDescription="@string/action_share"
-        android:elevation="@dimen/fab_elevation"
-        />
+        android:elevation="@dimen/fab_elevation" />
 
 </android.support.design.widget.CoordinatorLayout>

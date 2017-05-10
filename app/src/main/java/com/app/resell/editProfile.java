@@ -22,18 +22,17 @@ import com.mukesh.countrypicker.interfaces.CountryPickerListener;
 import com.mukesh.countrypicker.models.Country;
 
 // when first sign in with google to take the extra information
-public class editProfile extends AppCompatActivity{
-
+public class EditProfile extends AppCompatActivity {
 
 
     private EditText age;
     private EditText mobile;
     private Spinner gender;
 
-    String mage;
+    String mAge;
 
-    String mgender;
-    String mmobile,oldurl;
+    String mGender;
+    String mMobile, oldUrl;
     Account account;
     private FirebaseAuth firebaseAuth;
 
@@ -42,9 +41,9 @@ public class editProfile extends AppCompatActivity{
 
     //select country
     private TextInputLayout input_layout_country;
-    private EditText country_EditText_from;
+    private EditText countryEditTextFrom;
     private CountryPicker mCountryPicker;
-    private ImageView mCountryFlagImageView_from;
+    private ImageView mCountryFlagImageViewFrom;
     private String country;
 
     @Override
@@ -59,91 +58,91 @@ public class editProfile extends AppCompatActivity{
         firebaseAuth = FirebaseAuth.getInstance();
 
         Intent intent = getIntent();
-        account = (Account)intent.getSerializableExtra("accountinfo");
+        account = (Account) intent.getSerializableExtra("accountinfo");
 
         age = (EditText) findViewById(R.id.age);
         gender = (Spinner) findViewById(R.id.gender);
 
         mobile = (EditText) findViewById(R.id.mobile);
 
-        FireBaseCalls= new FireBaseCalls();
+        FireBaseCalls = new FireBaseCalls();
 
         //select country
-        country_EditText_from = (EditText) findViewById(R.id.pick_country_from);
-        mCountryFlagImageView_from = (ImageView) findViewById(R.id.row_icon_from);
+        countryEditTextFrom = (EditText) findViewById(R.id.pick_country_from);
+        mCountryFlagImageViewFrom = (ImageView) findViewById(R.id.row_icon_from);
         mCountryPicker = CountryPicker.newInstance("Select Country");
         setListener();
     }
 
-    private void edit(){
+    private void edit() {
         user = firebaseAuth.getCurrentUser();
-        mage=age.getText().toString().trim();
+        mAge = age.getText().toString().trim();
 
-        mmobile=mobile.getText().toString().trim();
-        mgender=gender.getSelectedItem().toString();
+        mMobile = mobile.getText().toString().trim();
+        mGender = gender.getSelectedItem().toString();
 
 
-        if(account!=null) {
-            if (mage.isEmpty()) mage = account.getAge();
+        if (account != null) {
+            if (mAge.isEmpty()) mAge = account.getAge();
 
-            if (mmobile.isEmpty()) mmobile = account.getMobile();
+            if (mMobile.isEmpty()) mMobile = account.getMobile();
 
-            oldurl=account.getImage_url();
+            oldUrl = account.getImage_url();
 
-            mgender=gender.getSelectedItem().toString();
+            mGender = gender.getSelectedItem().toString();
+
+        } else {
+
+            if (TextUtils.isEmpty(mGender)) {
+                Toast.makeText(this, "Please enter your gender", Toast.LENGTH_LONG).show();
+                return;
+
+            }
+            if (TextUtils.isEmpty(mAge)) {
+                Toast.makeText(this, "Please enter your age", Toast.LENGTH_LONG).show();
+                return;
+
+            }
+            if (TextUtils.isEmpty(mMobile)) {
+                Toast.makeText(this, "Please enter your mobile number", Toast.LENGTH_LONG).show();
+                return;
+
+            }
+            if (mGender.equals("Gender")) {
+                Toast.makeText(this, "Please enter your Gender", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if (TextUtils.isEmpty(countryEditTextFrom.getText().toString().trim())) {
+                Toast.makeText(this, "Please enter your country", Toast.LENGTH_LONG).show();
+                return;
+
+            }
 
         }
 
-        else{
-
-            if(TextUtils.isEmpty(mgender)){
-                Toast.makeText(this,"Please enter your gender",Toast.LENGTH_LONG).show();
-                return;
-
-            }
-            if(TextUtils.isEmpty(mage)){
-                Toast.makeText(this,"Please enter your age",Toast.LENGTH_LONG).show();
-                return;
-
-            }
-            if(TextUtils.isEmpty(mmobile)){
-                Toast.makeText(this,"Please enter your mobile number",Toast.LENGTH_LONG).show();
-                return;
-
-            }
-            if(mgender.equals("Gender")){
-                Toast.makeText(this,"Please enter your Gender",Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            if(TextUtils.isEmpty(country_EditText_from.getText().toString().trim())){
-                Toast.makeText(this,"Please enter your country",Toast.LENGTH_LONG).show();
-                return;
-
-            }
-
-        }
-
-        if(Utility.isOnline(this))
-        FireBaseCalls.AddFireBaseExtraInfo(user.getDisplayName(), mage, mmobile, mgender, user.getEmail(), user.getPhotoUrl() + "", this,country);
-        else  Toast.makeText(this, "no internet connection", Toast.LENGTH_LONG).show();
+        if (Utility.isOnline(this))
+            FireBaseCalls.addFireBaseExtraInfo(user.getDisplayName(), mAge, mMobile, mGender, user.getEmail(), user.getPhotoUrl() + "", this, country);
+        else Toast.makeText(this, "no internet connection", Toast.LENGTH_LONG).show();
 
     }
 
 
     @Override
     public void onBackPressed() {
-        if(account!=null) {
+        if (account != null) {
             finish();
         }
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_edit_profile, menu);//Menu Resource, Menu
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -163,26 +162,26 @@ public class editProfile extends AppCompatActivity{
             @Override
             public void onSelectCountry(String name, String code, String dialCode,
                                         int flagDrawableResID) {
-                country_EditText_from.setText(name);
-                mCountryFlagImageView_from.setImageResource(flagDrawableResID);
-                country= name;
+                countryEditTextFrom.setText(name);
+                mCountryFlagImageViewFrom.setImageResource(flagDrawableResID);
+                country = name;
                 mCountryPicker.getDialog().dismiss();
             }
         });
-        country_EditText_from.setOnClickListener(new View.OnClickListener() {
+        countryEditTextFrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCountryPicker.show(editProfile.this.getSupportFragmentManager(), "COUNTRY_PICKER");
+                mCountryPicker.show(EditProfile.this.getSupportFragmentManager(), "COUNTRY_PICKER");
             }
         });
 
-        country= getUserCountryInfo();
+        country = getUserCountryInfo();
     }
 
     private String getUserCountryInfo() {
-        Country country = mCountryPicker.getUserCountryInfo(editProfile.this);
-        mCountryFlagImageView_from.setImageResource(country.getFlag());
-        country_EditText_from.setText(country.getName());
+        Country country = mCountryPicker.getUserCountryInfo(EditProfile.this);
+        mCountryFlagImageViewFrom.setImageResource(country.getFlag());
+        countryEditTextFrom.setText(country.getName());
         return country.getName();
     }
 

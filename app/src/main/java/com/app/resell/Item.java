@@ -11,7 +11,7 @@ public class Item implements Serializable {
     private String size;
     private String price;
     private String imageUrl;
-    private  String userId;
+    private String userId;
     private String item_id;
 
     public String getItem_id() {

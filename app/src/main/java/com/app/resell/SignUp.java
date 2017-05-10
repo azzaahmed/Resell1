@@ -40,7 +40,7 @@ import java.io.IOException;
 public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     // *********************** upload image ***********************************//
-    private String profile_pic_path;
+    private String profilePicPath;
 
     private Uri imageUri = null;
 
@@ -48,9 +48,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     private static final int GALLERY_REQUEST = 1;
 
-    private ImageView imageView_circle;
+    private ImageView imageViewCircle;
 
-    boolean profilePic_attached = false;
+    boolean profilePicAttached = false;
 
     Bitmap bitmap;
 
@@ -62,7 +62,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private TextInputLayout inputLayoutEmail;
     private TextInputLayout inputLayoutPass;
     private TextInputLayout inputLayoutGender;
-    private TextInputLayout input_layout_country;
+    private TextInputLayout inputLayoutCountry;
 
     //defining view objects
     private EditText editTextEmail;
@@ -79,9 +79,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private Activity Activity;
 
     //select country
-    private EditText country_EditText_from;
+    private EditText countryEditTextFrom;
     private CountryPicker mCountryPicker;
-    private ImageView mCountryFlagImageView_from;
+    private ImageView mCountryFlagImageViewFrom;
     private String country;
 
     @Override
@@ -94,8 +94,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
 
         // *********************** upload image ***********************************//
-        imageView_circle  = (ImageView) findViewById(R.id.buttonChoose);
-        imageView_circle.setOnClickListener(this);
+        imageViewCircle = (ImageView) findViewById(R.id.buttonChoose);
+        imageViewCircle.setOnClickListener(this);
 
         mStorage = FirebaseStorage.getInstance().getReference();
 
@@ -108,7 +108,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         inputLayoutEmail = (TextInputLayout) findViewById(R.id.input_layout_email);
         inputLayoutPass = (TextInputLayout) findViewById(R.id.input_layout_pass);
         inputLayoutGender = (TextInputLayout) findViewById(R.id.input_layout_Gender);
-        input_layout_country=(TextInputLayout) findViewById(R.id.input_layout_country);
+        inputLayoutCountry = (TextInputLayout) findViewById(R.id.input_layout_country);
         // ************************************************************************//
 
 
@@ -127,16 +127,17 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         buttonSignUp.setOnClickListener(this);
 
 
-        FireBaseCalls= new FireBaseCalls();
+        FireBaseCalls = new FireBaseCalls();
         Activity = this;
 
 
         //select country
-        country_EditText_from = (EditText) findViewById(R.id.pick_country_from);
-        mCountryFlagImageView_from = (ImageView) findViewById(R.id.row_icon_from);
+        countryEditTextFrom = (EditText) findViewById(R.id.pick_country_from);
+        mCountryFlagImageViewFrom = (ImageView) findViewById(R.id.row_icon_from);
         mCountryPicker = CountryPicker.newInstance("Select Country");
         setListener();
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -151,7 +152,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonSignup:
-                if(validForm()) {
+                if (validForm()) {
                     registerUser();
                 }
                 break;
@@ -168,15 +169,15 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
 
         if (Utility.isOnline(this)) {
-            if (profilePic_attached) {
-              UploadImage();
+            if (profilePicAttached) {
+                uploadImage();
             } else {
                 FireBaseCalls.fireBaseRegistration(editTextEmail, editTextPassword, age, Name, mobile, gender, country, " ", getApplicationContext(), true, Activity);
 
             }
-        }
-        else Toast.makeText(this,"no internet connection",Toast.LENGTH_LONG).show();
+        } else Toast.makeText(this, "no internet connection", Toast.LENGTH_LONG).show();
     }
+
     // image upload
     private void showFileChooser() {
 
@@ -189,7 +190,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == GALLERY_REQUEST && resultCode == RESULT_OK){
+        if (requestCode == GALLERY_REQUEST && resultCode == RESULT_OK) {
 
             imageUri = data.getData();
             try {
@@ -204,21 +205,21 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
             Picasso.with(SignUp.this)
                     .load(imageUri).fit().centerCrop()
-                    .into(imageView_circle);
-            profilePic_attached = true;
+                    .into(imageViewCircle);
+            profilePicAttached = true;
 
         }
 
     }
 
-    public void UploadImage(){
+    public void uploadImage() {
 
         progressDialog.setMessage("Registering Please Wait...");
         progressDialog.show();
 
-        if(imageUri != null){
+        if (imageUri != null) {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG,20, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
             byte[] bytes = baos.toByteArray();
             String base64Image = Base64.encodeToString(bytes, Base64.DEFAULT);// no need
 
@@ -234,8 +235,8 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    profile_pic_path = taskSnapshot.getDownloadUrl()+"";
-                    FireBaseCalls.fireBaseRegistration( editTextEmail,editTextPassword,age, Name,mobile, gender,country,profile_pic_path,getApplicationContext(),false,Activity);
+                    profilePicPath = taskSnapshot.getDownloadUrl() + "";
+                    FireBaseCalls.fireBaseRegistration(editTextEmail, editTextPassword, age, Name, mobile, gender, country, profilePicPath, getApplicationContext(), false, Activity);
                 }
             });
 
@@ -244,84 +245,82 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    private boolean validForm(){
+    private boolean validForm() {
 
         int counter = 0;
         if (Name.getText().toString().trim().isEmpty()) {
             inputLayoutName.setError("please enter your name");
             requestFocus(Name);
-            counter ++;
+            counter++;
         } else {
             inputLayoutName.setErrorEnabled(false);
         }
         if (age.getText().toString().trim().isEmpty()) {
             inputLayoutAge.setError("please enter your age");
             requestFocus(age);
-            counter ++;
+            counter++;
         } else {
-            if(Integer.parseInt(age.getText().toString().trim())<12 || Integer.parseInt(age.getText().toString().trim())> 90) {
+            if (Integer.parseInt(age.getText().toString().trim()) < 12 || Integer.parseInt(age.getText().toString().trim()) > 90) {
                 inputLayoutAge.setError("please enter reasonable age");
                 requestFocus(age);
                 counter++;
-            }
-            else
+            } else
                 inputLayoutAge.setErrorEnabled(false);
         }
         if (mobile.getText().toString().trim().isEmpty()) {
             inputLayoutMobile.setError("Invalid mobile number");
             requestFocus(mobile);
-            counter ++;
+            counter++;
         } else {
             inputLayoutMobile.setErrorEnabled(false);
         }
         if (editTextEmail.getText().toString().trim().isEmpty()) {
             inputLayoutEmail.setError("Invalid Email");
             requestFocus(editTextEmail);
-            counter ++;
+            counter++;
         } else {
             inputLayoutEmail.setErrorEnabled(false);
         }
-        if (editTextPassword.getText().toString().trim().isEmpty()|| editTextPassword.getText().toString().trim().length()<6) {
+        if (editTextPassword.getText().toString().trim().isEmpty() || editTextPassword.getText().toString().trim().length() < 6) {
             inputLayoutPass.setError("password at least 6 characters");
             requestFocus(editTextPassword);
-            counter ++;
+            counter++;
         } else {
             inputLayoutPass.setErrorEnabled(false);
         }
-        if(!isValidEmail(editTextEmail.getText())){
+        if (!isValidEmail(editTextEmail.getText())) {
             inputLayoutEmail.setError("Invalid Email");
             requestFocus(editTextEmail);
-            counter ++;
+            counter++;
         } else {
             inputLayoutEmail.setErrorEnabled(false);
         }
 
-        if(!isValidPhone(mobile.getText())){
+        if (!isValidPhone(mobile.getText())) {
             inputLayoutMobile.setError("Invalid mobile number");
             requestFocus(mobile);
-            counter ++;
+            counter++;
         } else {
             inputLayoutMobile.setErrorEnabled(false);
         }
-        if(gender.getSelectedItem().toString().equals("Gender")){
-             inputLayoutGender.setError("Enter your gender");
+        if (gender.getSelectedItem().toString().equals("Gender")) {
+            inputLayoutGender.setError("Enter your gender");
             requestFocus(gender);
-            counter ++;
-        }else{
+            counter++;
+        } else {
             inputLayoutGender.setErrorEnabled(false);
         }
-        if(country_EditText_from.getText().toString().trim().isEmpty()){
-            input_layout_country.setError("Enter your country");
-            requestFocus(country_EditText_from);
-            counter ++;
-        }else{
-            input_layout_country.setErrorEnabled(false);
+        if (countryEditTextFrom.getText().toString().trim().isEmpty()) {
+            inputLayoutCountry.setError("Enter your country");
+            requestFocus(countryEditTextFrom);
+            counter++;
+        } else {
+            inputLayoutCountry.setErrorEnabled(false);
         }
 
-        if(counter == 0){
+        if (counter == 0) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     private void requestFocus(View view) {
@@ -329,17 +328,18 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
     }
+
     public final static boolean isValidEmail(CharSequence target) {
         return !TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches();
     }
+
     public final static boolean isValidPhone(CharSequence target) {
         int x = target.length();
-        if(x!=11){
+        if (x != 11) {
             return false;
         }
         return !TextUtils.isEmpty(target) && Patterns.PHONE.matcher(target).matches();
     }
-
 
 
     //select country
@@ -348,27 +348,26 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onSelectCountry(String name, String code, String dialCode,
                                         int flagDrawableResID) {
-                country_EditText_from.setText(name);
-                mCountryFlagImageView_from.setImageResource(flagDrawableResID);
-               country= name;
+                countryEditTextFrom.setText(name);
+                mCountryFlagImageViewFrom.setImageResource(flagDrawableResID);
+                country = name;
                 mCountryPicker.getDialog().dismiss();
             }
         });
-        country_EditText_from.setOnClickListener(new View.OnClickListener() {
+        countryEditTextFrom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mCountryPicker.show(SignUp.this.getSupportFragmentManager(), "COUNTRY_PICKER");
             }
         });
 
-       country= getUserCountryInfo();
+        country = getUserCountryInfo();
     }
 
     private String getUserCountryInfo() {
         Country country = mCountryPicker.getUserCountryInfo(SignUp.this);
-        mCountryFlagImageView_from.setImageResource(country.getFlag());
-
-        country_EditText_from.setText(country.getName());
+        mCountryFlagImageViewFrom.setImageResource(country.getFlag());
+        countryEditTextFrom.setText(country.getName());
         return country.getName();
     }
 

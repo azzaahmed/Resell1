@@ -19,12 +19,11 @@
         android:clipToPadding="false"
         android:scrollbarStyle="outsideOverlay"
         android:paddingBottom="28dp"
-    android:verticalSpacing="10dp"
-    android:horizontalSpacing="10dp"
-    android:numColumns="auto_fit"
-    android:stretchMode="columnWidth"
-    android:gravity="center"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
         android:nestedScrollingEnabled="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        />
-    </FrameLayout>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+</FrameLayout>

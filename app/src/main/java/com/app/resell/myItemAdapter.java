@@ -22,14 +22,15 @@ import java.util.List;
 /**
  * Created by azza ahmed on 5/4/2017.
  */
-public class myItemAdapter extends RecyclerView.Adapter<myItemAdapter.MyViewHolder>{
+public class MyItemAdapter extends RecyclerView.Adapter<MyItemAdapter.MyViewHolder> {
 
     private List<Item> itemsList;
     private Activity activity;
     public int lastPosition = -1;
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView price, description ,size;
-        private ImageView image,deleteButton;
+        private TextView price, description, size;
+        private ImageView image, deleteButton;
 
 
         public MyViewHolder(View view) {
@@ -37,14 +38,14 @@ public class myItemAdapter extends RecyclerView.Adapter<myItemAdapter.MyViewHold
             price = (TextView) view.findViewById(R.id.price);
             description = (TextView) view.findViewById(R.id.description);
             size = (TextView) view.findViewById(R.id.size);
-            image= (ImageView) view.findViewById(R.id.item_imageview);
-            deleteButton=(ImageView)view.findViewById(R.id.delete);
+            image = (ImageView) view.findViewById(R.id.item_imageview);
+            deleteButton = (ImageView) view.findViewById(R.id.delete);
         }
     }
 
-    public myItemAdapter(List<Item> itemsList,Activity activity) {
+    public MyItemAdapter(List<Item> itemsList, Activity activity) {
         this.itemsList = itemsList;
-        this.activity=activity;
+        this.activity = activity;
     }
 
     @Override
@@ -64,9 +65,9 @@ public class myItemAdapter extends RecyclerView.Adapter<myItemAdapter.MyViewHold
         Picasso.with(activity).load(item.getImageUrl()).fit().centerCrop()
                 .into(holder.image);
 
-        if(Utility.isOnline(activity))
-        delete(holder,position);
-else Toast.makeText(activity,"no internet connection",Toast.LENGTH_LONG).show();
+        if (Utility.isOnline(activity))
+            delete(holder, position);
+        else Toast.makeText(activity, "no internet connection", Toast.LENGTH_LONG).show();
 
         // Here you apply the animation of item when the view is bound
         setAnimation(holder.itemView, position);
@@ -76,22 +77,22 @@ else Toast.makeText(activity,"no internet connection",Toast.LENGTH_LONG).show();
     public int getItemCount() {
         return itemsList.size();
     }
-    public void clear(){
+
+    public void clear() {
         itemsList.clear();
     }
 
-    public void delete(MyViewHolder holder, final int position){
+    public void delete(MyViewHolder holder, final int position) {
 
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                switch (which){
+                switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
                         //Yes button clicked
                         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                        DatabaseReference x= databaseReference.child("items").child(itemsList.get(position).getItem_id());
+                        DatabaseReference x = databaseReference.child("items").child(itemsList.get(position).getItem_id());
                         x.removeValue();
-
 
 
                         Toast toast = Toast.makeText(activity, "Item is deleted", Toast.LENGTH_SHORT);
@@ -120,16 +121,13 @@ else Toast.makeText(activity,"no internet connection",Toast.LENGTH_LONG).show();
         });
 
 
-
     }
 
-//for animation of the list
-    private void setAnimation(View viewToAnimate, int position)
-    {
+    //for animation of the list
+    private void setAnimation(View viewToAnimate, int position) {
 
         // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition)
-        {
+        if (position > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(activity.getApplicationContext(), android.R.anim.slide_in_left);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;

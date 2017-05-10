@@ -14,7 +14,7 @@ public class Account implements Serializable {
     private String email;
     private String gender;
     private String mobile;
-    private String  country;
+    private String country;
 
     private String id;
 
@@ -33,14 +33,14 @@ public class Account implements Serializable {
         return country;
     }
 
-    public Account(String name,String age,String mobile,String gender,String email,String image_url,String country) {
-        this.name=name;
-        this.age=age;
-        this.mobile=mobile;
-        this.gender=gender;
-        this.email=email;
+    public Account(String name, String age, String mobile, String gender, String email, String image_url, String country) {
+        this.name = name;
+        this.age = age;
+        this.mobile = mobile;
+        this.gender = gender;
+        this.email = email;
         this.image_url = image_url;
-        this.country=country;
+        this.country = country;
 
 
     }

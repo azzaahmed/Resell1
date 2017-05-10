@@ -23,41 +23,40 @@ import com.squareup.picasso.Picasso;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class itemDetailsFragment extends Fragment {
+public class ItemDetailsFragment extends Fragment {
     private Item clickedItem;
-    TextView price,size,description,ownerName;
+    TextView price, size, description, ownerName;
     ImageView itemImage;
     ImageView profileImage;
     private DatabaseReference databaseReference;
-    String TAG="itemDetailsFragment";
+    String TAG = "itemDetailsFragment";
 
-    public itemDetailsFragment() {
+    public ItemDetailsFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_item_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_item_details, container, false);
 
 
         getActivity().getWindow().setSharedElementEnterTransition(TransitionInflater.from(getActivity())
                 .inflateTransition(R.transition.move));
 
-        databaseReference= FirebaseDatabase.getInstance().getReference();
+        databaseReference = FirebaseDatabase.getInstance().getReference();
 
 
         Intent intent = getActivity().getIntent();
 
-        clickedItem= (Item) intent.getSerializableExtra("selectedItem");
+        clickedItem = (Item) intent.getSerializableExtra("selectedItem");
 
         price = (TextView) view.findViewById(R.id.price);
-        description=(TextView) view.findViewById(R.id.description);
-        size=(TextView) view.findViewById(R.id.size);
-        profileImage=(ImageView) view.findViewById(R.id.item_photo);
-        itemImage=(ImageView) view.findViewById(R.id.header_cover_image);
-        ownerName=(TextView) view.findViewById(R.id.user_profile_name);
+        description = (TextView) view.findViewById(R.id.description);
+        size = (TextView) view.findViewById(R.id.size);
+        profileImage = (ImageView) view.findViewById(R.id.item_photo);
+        itemImage = (ImageView) view.findViewById(R.id.header_cover_image);
+        ownerName = (TextView) view.findViewById(R.id.user_profile_name);
         Log.d(TAG, "on create fragment details");
-
 
 
         profileImage.setOnClickListener(new View.OnClickListener() {
@@ -73,23 +72,23 @@ public class itemDetailsFragment extends Fragment {
 
             }
         });
-        if(Utility.isOnline(getActivity())) {
+        if (Utility.isOnline(getActivity())) {
             if (clickedItem != null)
                 getUserInfo(clickedItem.getUserId());
             else {
                 Log.v(TAG, "clicked item null");
 
             }
-        } else Toast.makeText(getContext(),"no internet connection",Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(getContext(), "no internet connection", Toast.LENGTH_SHORT).show();
         return view;
     }
 
 
-    public void settingData(){
+    public void settingData() {
         price.setText(clickedItem.getPrice());
         description.setText(clickedItem.getDescription());
 
-       // clickedItem.getUserId();
+        // clickedItem.getUserId();
         size.setText(clickedItem.getSize());
         Picasso.with(getActivity())
                 .load(clickedItem.getImageUrl()).fit().centerCrop()
@@ -109,7 +108,7 @@ public class itemDetailsFragment extends Fragment {
     }
 
 
-    public void getUserInfo (String user_id) {
+    public void getUserInfo(String user_id) {
 
         final Account[] account = new Account[1];
 

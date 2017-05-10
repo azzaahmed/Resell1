@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
     private GridView gridview;
     private ItemsAdapter imageAdapter;
     public static ProgressDialog progress;
-    Firebase itemListsRef=null;
+    Firebase itemListsRef = null;
 
     public HomeFragment() {
     }
@@ -33,19 +33,19 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-         progress = new ProgressDialog(getActivity());
-        if(Utility.isOnline(getActivity())) {
-        progress.setMessage("loading.....");
-        progress.show();
-        progress.setCancelable(false);
+        progress = new ProgressDialog(getActivity());
+        if (Utility.isOnline(getActivity())) {
+            progress.setMessage("loading.....");
+            progress.show();
+            progress.setCancelable(false);
         }
         Firebase.setAndroidContext(getActivity());
         gridview = (GridView) view.findViewById(R.id.gridview);
 
 
-        if(Utility.isOnline(getActivity())) {
+        if (Utility.isOnline(getActivity())) {
             itemListsRef = new Firebase("https://resell-8d488.firebaseio.com/").child("items");
 
             if (itemListsRef == null) {
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment {
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Item selectedItem = imageAdapter.getItem(position);
                     Log.v(TAG, "item clicked");
-                    Intent intent = new Intent(getActivity(), itemDetails.class).putExtra("selectedItem", selectedItem);
+                    Intent intent = new Intent(getActivity(), ItemDetails.class).putExtra("selectedItem", selectedItem);
                     //startActivity(intent);
                     Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(getActivity()
                             , view.findViewById(R.id.grid_item_imageview), view.findViewById(R.id.grid_item_imageview).getTransitionName()).toBundle();
@@ -73,8 +73,7 @@ public class HomeFragment extends Fragment {
             });
 
 
-        }
-        else{
+        } else {
             Toast.makeText(getContext(), "no internet connection", Toast.LENGTH_LONG).show();
         }
 
@@ -83,11 +82,11 @@ public class HomeFragment extends Fragment {
     }
 
 
-
     @Override
     public void onResume() {
         super.onResume();
     }
+
     @Override
     public void onStart() {
         super.onStart();

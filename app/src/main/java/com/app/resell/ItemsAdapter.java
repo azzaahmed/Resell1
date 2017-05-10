@@ -21,7 +21,6 @@ public class ItemsAdapter extends FirebaseListAdapter<Item> {
     }
 
 
-
     /**
      * Protected method that populates the view attached to the adapter (list_view_active_lists)
      * with items inflated from single_active_list.xml

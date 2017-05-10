@@ -1,143 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="32dp"
-        android:paddingRight="32dp"
-        android:paddingTop="72dp"
-        tools:context=".editProfile"
-        android:background="@color/ColorWhite"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="32dp"
+    android:paddingRight="32dp"
+    android:paddingTop="72dp"
+    tools:context=".EditProfile"
+    android:background="@color/ColorWhite"
     tools:showIn="@layout/activity_edit_profile">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
 
-            <TableRow
-                android:layout_marginBottom="5dp"
-                android:layout_height="40dp"
-                android:layout_width="match_parent">
+        <TableRow
+            android:layout_marginBottom="5dp"
+            android:layout_height="40dp"
+            android:layout_width="match_parent">
 
-                <ImageView
-                    android:layout_marginRight="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/gender"
-                    android:adjustViewBounds="true"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp" />
-                <Spinner
-                    android:id="@+id/gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:entries="@array/GenderSelect"
-                    android:prompt="@string/Gender"
-                    android:overlapAnchor="false"/>
+            <ImageView
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/gender"
+                android:adjustViewBounds="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
 
-            </TableRow>
-
-            <TableRow
-                android:layout_marginBottom="5dp"
-                android:layout_height="40dp"
-                android:layout_width="match_parent">
-
-                <ImageView
-                    android:layout_marginRight="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/age"
-                    android:adjustViewBounds="true"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp" />
-
-                <EditText
-                    android:maxLength="2"
-                    android:textSize="18sp"
-                    android:id="@+id/age"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/age"
-                    android:inputType="number" />
-            </TableRow>
-
-            <TableRow
-                android:layout_marginBottom="5dp"
-                android:layout_height="40dp"
-                android:layout_width="match_parent">
-
-                <ImageView
-                    android:layout_marginRight="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/number"
-                    android:adjustViewBounds="true"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp" />
-
-                <EditText
-                    android:maxLength="11"
-                    android:textSize="18sp"
-                    android:id="@+id/mobile"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/mobile"
-                    android:inputType="number" />
-            </TableRow>
-
-            <TableRow
+            <Spinner
+                android:id="@+id/gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginBottom="5dp"
-                android:layout_height="40dp"
-                android:layout_width="match_parent">
+                android:entries="@array/GenderSelect"
+                android:prompt="@string/Gender"
+                android:overlapAnchor="false" />
 
-                <ImageView
-                    android:layout_marginRight="20dp"
-                    android:id="@+id/row_icon_from"
-                    android:adjustViewBounds="true"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/google_maps"/>
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/input_layout_country"
-                    android:layout_width="0dp"
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="5dp"
+            android:layout_height="40dp"
+            android:layout_width="match_parent">
+
+            <ImageView
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/age"
+                android:adjustViewBounds="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
+            <EditText
+                android:maxLength="2"
+                android:textSize="18sp"
+                android:id="@+id/age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/age"
+                android:inputType="number" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="5dp"
+            android:layout_height="40dp"
+            android:layout_width="match_parent">
+
+            <ImageView
+                android:layout_marginRight="20dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/number"
+                android:adjustViewBounds="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+
+            <EditText
+                android:maxLength="11"
+                android:textSize="18sp"
+                android:id="@+id/mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/mobile"
+                android:inputType="number" />
+        </TableRow>
+
+        <TableRow
+            android:layout_weight="1"
+            android:layout_marginBottom="5dp"
+            android:layout_height="40dp"
+            android:layout_width="match_parent">
+
+            <ImageView
+                android:layout_marginRight="20dp"
+                android:id="@+id/row_icon_from"
+                android:adjustViewBounds="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/google_maps" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/input_layout_country"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:paddingRight="16dp"
+                android:paddingLeft="16dp">
+
+                <EditText
+                    android:id="@+id/pick_country_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:cursorVisible="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="true"
                     android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:paddingRight="16dp"
-                    android:paddingLeft="16dp">
+                    android:hint="@string/country" />
+            </android.support.design.widget.TextInputLayout>
+        </TableRow>
 
-                    <EditText
-                        android:id="@+id/pick_country_from"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:cursorVisible="false"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:clickable="true"
-                        android:layout_weight="1"
-                        android:hint="@string/country"
-                        />
-                </android.support.design.widget.TextInputLayout>
-            </TableRow>
+    </TableLayout>
 
-        </TableLayout>
-        <Button
-            android:id="@+id/edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/edit"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:theme="@style/MyButton"/>
+    <Button
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/edit"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:theme="@style/MyButton" />
 
-    </LinearLayout>
+</LinearLayout>

@@ -9,7 +9,7 @@ import android.util.Log;
  */
 public class ItemIntentService extends IntentService {
 
-    public ItemIntentService (){
+    public ItemIntentService() {
         super(ItemIntentService.class.getSimpleName());
 
     }

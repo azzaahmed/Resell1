@@ -53,7 +53,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 //sign in
-public class MainActivity extends AppCompatActivity  implements GoogleApiClient.ConnectionCallbacks,
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener, LoaderManager.LoaderCallbacks {
 
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity  implements GoogleApiClient.
 
     //defining views
     private Button buttonSignIn;
-    private TextView textViewSignup;
+    private TextView textViewSignUp;
 
 
     //defining firebaseauth object
@@ -81,12 +81,13 @@ public class MainActivity extends AppCompatActivity  implements GoogleApiClient.
     private DatabaseReference databaseReference;
     GoogleSignInAccount accountt;
 
-    boolean SignedInclick;
-    int counterin = 0;
+    boolean SignedInClick;
+    int counterIn = 0;
     SharedPreferences prefs = null;
-Bitmap mBitmap;
+    Bitmap mBitmap;
     ImageView mWelcome;
-     LinearLayout signInLayout;
+    LinearLayout signInLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,14 +95,14 @@ Bitmap mBitmap;
 
         //first run
         prefs = getSharedPreferences("com.app.resell", MODE_PRIVATE);
-         mWelcome = (ImageView) findViewById(R.id.welcome);
-        signInLayout=(LinearLayout)findViewById(R.id.signinLayout);
+        mWelcome = (ImageView) findViewById(R.id.welcome);
+        signInLayout = (LinearLayout) findViewById(R.id.signinLayout);
 
         buttonSignIn = (Button) findViewById(R.id.buttonSignin);
-        textViewSignup = (TextView) findViewById(R.id.textViewSignUp);
+        textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
         //attaching click listener
         buttonSignIn.setOnClickListener(this);
-        textViewSignup.setOnClickListener(this);
+        textViewSignUp.setOnClickListener(this);
 
 
         //initializing firebase auth object
@@ -157,7 +158,7 @@ Bitmap mBitmap;
         signInButton.setScopes(gso.getScopeArray());
         // [END customize_button]
 
-        SignedInclick = false;
+        SignedInClick = false;
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -170,24 +171,24 @@ Bitmap mBitmap;
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid() + "  " + user.getProviders() + "  " + user.getDisplayName());
 
 //  counterin is needed as for some reason the listener is triggered two times (found out it is an issue with firebase listener itself)
-                    if (!SignedInclick) {
-                        if (counterin != 1 && counterin != 2) {
-                            Log.d(TAG, "sent to Find Ride from auth listener");
-                            Log.d(TAG, "counter" + counterin);
+                    if (!SignedInClick) {
+                        if (counterIn != 1 && counterIn != 2) {
+                            Log.d(TAG, "sent to Home from auth listener");
+                            Log.d(TAG, "counter" + counterIn);
                             startActivity(new Intent(getApplicationContext(), Home.class));
 
 
                             finish();
-                            counterin++;
+                            counterIn++;
                         } else {
-                            counterin++;
+                            counterIn++;
                         }
                     }
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // ...
+
             }
         };
 
@@ -224,12 +225,12 @@ Bitmap mBitmap;
         if (extras != null) {
             Log.d(TAG, "in extra and " + mGoogleApiClient.isConnected());
 
-            String SignOut_flag = extras.getString("SignOut_flag");
-            if (SignOut_flag.equals("true"))
+            String SignOutFlag = extras.getString("SignOut_flag");
+            if (SignOutFlag.equals("true"))
                 mGoogleApiClient.connect();
         }
         Log.v(TAG, "pref " + prefs.getBoolean("firstrun", true));
-        if(Utility.isOnline(this)) {
+        if (Utility.isOnline(this)) {
             if (prefs.getBoolean("firstrun", true)) {
                 Log.v(TAG, "first run");
                 // Do first run stuff here then set 'firstrun' as false
@@ -241,7 +242,7 @@ Bitmap mBitmap;
                 Log.v(TAG, "not first run");
 
             }
-        }else Toast.makeText(this,"no internet connection",Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "no internet connection", Toast.LENGTH_SHORT).show();
         firebaseAuth.addAuthStateListener(mAuthListener);
 
     }
@@ -355,7 +356,7 @@ Bitmap mBitmap;
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_in_button:
-                SignedInclick = true;
+                SignedInClick = true;
                 signIn();
                 break;
 
@@ -364,7 +365,7 @@ Bitmap mBitmap;
                 break;
 
             case R.id.buttonSignin:
-                SignedInclick = true;
+                SignedInClick = true;
                 userLogin();
                 break;
 
@@ -492,7 +493,7 @@ Bitmap mBitmap;
                 } else {
                     finish();
                     //if it is the first time to sign in with google go to edit profile to add the extra needed info for the profile
-                    startActivity(new Intent(getApplicationContext(), editProfile.class));
+                    startActivity(new Intent(getApplicationContext(), EditProfile.class));
 
                 }
             }
@@ -520,48 +521,53 @@ Bitmap mBitmap;
 
     @Override
     public Loader onCreateLoader(int id, Bundle args) {
-      final String URL = "https://drive.google.com/uc?id=0Bx2A07u8aRxSbG1Dc1NJNmpTRzA";
 
-    return new AsyncTaskLoader<Bitmap>(this) {
-Bitmap mBitmap=null;
-        @Override
-        protected void onStartLoading() {
-            if (mBitmap != null) {
-                deliverResult(mBitmap);
-            } else {
-                showProgressDialog();
-                forceLoad();
+        //url of welcome image that is loaded when you first install the app
+        final String URL = "https://drive.google.com/uc?id=0Bx2A07u8aRxSbG1Dc1NJNmpTRzA";
+
+        return new AsyncTaskLoader<Bitmap>(this) {
+            Bitmap mBitmap = null;
+
+            @Override
+            protected void onStartLoading() {
+                if (mBitmap != null) {
+                    deliverResult(mBitmap);
+                } else {
+                    showProgressDialog();
+                    forceLoad();
+                }
             }
-        }
-        @Override
-        public Bitmap loadInBackground() {
-            Log.v(TAG,"in background");
-            return download_Image(URL);
-        }
 
-        public void deliverResult(Bitmap data) {
-            mBitmap = data;
-            super.deliverResult(data);
-        }
-        private Bitmap download_Image(String url) {
-            Bitmap bm = null;
-            try {
-                URL aURL = new URL(url);
-                URLConnection conn = aURL.openConnection();
-                conn.connect();
-                InputStream is = conn.getInputStream();
-                BufferedInputStream bis = new BufferedInputStream(is);
-                bm = BitmapFactory.decodeStream(bis);
-                bis.close();
-                is.close();
-            } catch (IOException e) {
-                Log.e("Hub", "Error getting the image from server : " + e.getMessage().toString());
+            @Override
+            public Bitmap loadInBackground() {
+                Log.v(TAG, "in background");
+                return download_Image(URL);
             }
-            Log.v(TAG, "create bitmap " + bm);
 
-            return bm;
-        }
-    };
+            public void deliverResult(Bitmap data) {
+                mBitmap = data;
+                super.deliverResult(data);
+            }
+
+            private Bitmap download_Image(String url) {
+                Bitmap bm = null;
+                try {
+                    URL aURL = new URL(url);
+                    URLConnection conn = aURL.openConnection();
+                    conn.connect();
+                    InputStream is = conn.getInputStream();
+                    BufferedInputStream bis = new BufferedInputStream(is);
+                    bm = BitmapFactory.decodeStream(bis);
+                    bis.close();
+                    is.close();
+                } catch (IOException e) {
+                    Log.e("Hub", "Error getting the image from server : " + e.getMessage().toString());
+                }
+                Log.v(TAG, "create bitmap " + bm);
+
+                return bm;
+            }
+        };
 
     }
 
@@ -572,17 +578,17 @@ Bitmap mBitmap=null;
         mWelcome.setImageBitmap((Bitmap) data);
         mWelcome.setVisibility(View.VISIBLE);
         Runnable mRunnable;
-        Handler mHandler=new Handler();
+        Handler mHandler = new Handler();
 
-        mRunnable=new Runnable() {
+        mRunnable = new Runnable() {
 
             @Override
             public void run() {
-                 mWelcome.setVisibility(View.GONE);
+                mWelcome.setVisibility(View.GONE);
                 signInLayout.setVisibility(View.VISIBLE);
             }
         };
-        mHandler.postDelayed(mRunnable,5*1000);
+        mHandler.postDelayed(mRunnable, 5 * 1000);
     }
 
     @Override

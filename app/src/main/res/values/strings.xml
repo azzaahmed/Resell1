@@ -36,5 +36,6 @@
     <string name="imageTransition">imageTransitionName</string>
     <string name="title_widget_detail">Resell</string>
     <string name="empty_resell_list">emty list</string>
+    <string name="edit_profile">edit profile</string>
 
 </resources>
