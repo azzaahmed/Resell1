@@ -106,8 +106,7 @@ public class ItemDetailsFragment extends Fragment {
 
 
     }
-
-
+    
     public void getUserInfo(String user_id) {
 
         final Account[] account = new Account[1];
