@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.app.resell.Data.FireBaseCall;
+import com.app.resell.Data.FireBaseCalls;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mukesh.countrypicker.fragments.CountryPicker;
@@ -35,7 +35,7 @@ public class EditProfile extends AppCompatActivity {
     Account account;
     private FirebaseAuth firebaseAuth;
 
-    private FireBaseCall FireBaseCall;
+    private FireBaseCalls FireBaseCalls;
     FirebaseUser user;
 
     //select country
@@ -63,7 +63,7 @@ public class EditProfile extends AppCompatActivity {
 
         mobile = (EditText) findViewById(R.id.mobile);
 
-        FireBaseCall = new FireBaseCall();
+        FireBaseCalls = new FireBaseCalls();
 
         //select country
         countryEditTextFrom = (EditText) findViewById(R.id.pick_country_from);
@@ -120,7 +120,7 @@ public class EditProfile extends AppCompatActivity {
         }
 
         if (Utility.isOnline(this))
-            FireBaseCall.addFireBaseExtraInfo(user.getDisplayName(), mAge, mMobile, mGender, user.getEmail(), user.getPhotoUrl() + "", this, country);
+            FireBaseCalls.addFireBaseExtraInfo(user.getDisplayName(), mAge, mMobile, mGender, user.getEmail(), user.getPhotoUrl() + "", this, country);
         else Toast.makeText(this,this.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
 
     }
