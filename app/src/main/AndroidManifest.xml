@@ -62,7 +62,7 @@
         </activity>
 
         <activity
-            android:name=".MyItems"
+            android:name=".MyItems1"
             android:label="@string/title_activity_my_items">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
