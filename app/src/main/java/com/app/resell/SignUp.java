@@ -23,7 +23,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.app.resell.Data.FireBaseCalls;
+import com.app.resell.Data.FireBaseCall;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
@@ -75,7 +75,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
     private Spinner gender;
 
 
-    private FireBaseCalls FireBaseCalls;
+    private FireBaseCall FireBaseCall;
     private Activity Activity;
 
     //select country
@@ -127,7 +127,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         buttonSignUp.setOnClickListener(this);
 
 
-        FireBaseCalls = new FireBaseCalls();
+        FireBaseCall = new FireBaseCall();
         Activity = this;
 
 
@@ -172,7 +172,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
             if (profilePicAttached) {
                 uploadImage();
             } else {
-                FireBaseCalls.fireBaseRegistration(editTextEmail, editTextPassword, age, Name, mobile, gender, country, " ", getApplicationContext(), true, Activity);
+                FireBaseCall.fireBaseRegistration(editTextEmail, editTextPassword, age, Name, mobile, gender, country, " ", getApplicationContext(), true, Activity);
 
             }
         } else Toast.makeText(this,this.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
@@ -236,7 +236,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     profilePicPath = taskSnapshot.getDownloadUrl() + "";
-                    FireBaseCalls.fireBaseRegistration(editTextEmail, editTextPassword, age, Name, mobile, gender, country, profilePicPath, getApplicationContext(), false, Activity);
+                    FireBaseCall.fireBaseRegistration(editTextEmail, editTextPassword, age, Name, mobile, gender, country, profilePicPath, getApplicationContext(), false, Activity);
                 }
             });
 
