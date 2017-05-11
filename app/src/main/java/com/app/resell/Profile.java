@@ -328,7 +328,7 @@ public class Profile extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_items) {
-            startActivity(new Intent(this, MyItems1.class));
+            startActivity(new Intent(this, MyItems.class));
             return true;
         }
 

@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class MyItems1 extends AppCompatActivity {
+public class MyItems extends AppCompatActivity {
     private static final String TAG = "myItems";
     private ArrayList<Item> itemsList = new ArrayList<>();
     private FirebaseUser currentUser;
@@ -76,6 +76,7 @@ public class MyItems1 extends AppCompatActivity {
         super.onStart();
 
     }
+
 
     
 
