@@ -493,7 +493,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                 } else {
                     finish();
                     //if it is the first time to sign in with google go to edit profile to add the extra needed info for the profile
-                    startActivity(new Intent(getApplicationContext(), EditProfile2.class));
+                    startActivity(new Intent(getApplicationContext(), EditProfile.class));
 
                 }
             }
