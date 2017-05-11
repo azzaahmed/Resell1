@@ -10,7 +10,7 @@
     android:paddingLeft="32dp"
     android:paddingRight="32dp"
     android:paddingTop="72dp"
-    tools:context=".EditProfile"
+    tools:context=".EditProfile2"
     android:background="@color/ColorWhite"
     tools:showIn="@layout/activity_edit_profile">
 

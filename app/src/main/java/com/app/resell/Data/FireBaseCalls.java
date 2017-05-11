@@ -45,7 +45,7 @@ public class FireBaseCalls {
     public FireBaseCalls() {
     }
 
-    
+
     //sign up
     public void fireBaseRegistration(EditText editTextEmail, EditText editTextPassword, EditText age, EditText name, EditText mobile, Spinner gender, final String country, final String profilePicPath, final Context context, final boolean noProfilePictureFlag, final Activity activity) {
 
