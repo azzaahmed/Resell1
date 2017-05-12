@@ -104,8 +104,9 @@ public class HomeFragment extends Fragment {
 
     }
 
-    private String getCountryName() {
 
+    private String getCountryName() {
+//country of the android device
         Country country =   CountryPicker.newInstance("Select Country").getUserCountryInfo(getActivity());
 
         return country.getName();

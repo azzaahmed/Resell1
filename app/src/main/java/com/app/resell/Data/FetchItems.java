@@ -103,5 +103,5 @@ public class FetchItems {
                 .setPackage(context.getPackageName());
         context.sendBroadcast(dataUpdatedIntent);
     }
-
+    
 }
