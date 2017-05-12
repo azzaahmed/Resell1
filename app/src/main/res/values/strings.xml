@@ -72,4 +72,21 @@
     <string name="updating">Updating Please Wait.....</string>
     <string name="enter_name">Please enter your name</string>
 
+
+    <!-- Title for the  Items preference  -->
+    <string name="pref_Location_label">Items shown Location</string>
+    <!-- Key name for items location preference in SharedPreferences  -->
+    <string name="pref_Location_key" translatable="false">location</string>
+
+    <!-- Value in SharedPreferences for my country only items option -->
+    <string name="pref_location_my_country" translatable="false">my country only</string>
+    <!-- Value in SharedPreferences for world wide items  option used also as default value -->
+    <string name="pref_location_all_countries" translatable="false">world Wide</string>
+
+
+    <string name="pref_location_label_all_countries">World Wide</string>
+    <string name="pref_location_label_my_country">My country only</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+
 </resources>

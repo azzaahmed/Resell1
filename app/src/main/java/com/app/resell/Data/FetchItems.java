@@ -28,14 +28,16 @@ public class FetchItems {
 
     public static final String ACTION_DATA_UPDATED = "com.app.resell.ACTION_DATA_UPDATED";
     public static ArrayList<Item> itemsList = new ArrayList<>();
+    public static ArrayList<Item> itemsCountryList = new ArrayList<>();
     private static final int INITIAL_BACKOFF = 10000;
     private static final int ONE_OFF_ID = 2;
 
     public FetchItems() {
     }
 
+    //for widget
     public static void getMyItems(final Context context) {
-        Log.v("Home", "get widget data");
+        Log.v("Home", "FtechItems get widget data");
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         final FirebaseUser currentUser;
@@ -67,7 +69,7 @@ public class FetchItems {
         });
     }
 
-
+    //for widget
     public static synchronized void syncImmediately(Context context) {
 
         ConnectivityManager cm =
@@ -93,6 +95,7 @@ public class FetchItems {
         }
     }
 
+    //for widget
     private static void updateWidgets(Context context) {
 
         // Setting the package ensures that only components in our app will receive the broadcast
@@ -100,4 +103,5 @@ public class FetchItems {
                 .setPackage(context.getPackageName());
         context.sendBroadcast(dataUpdatedIntent);
     }
+
 }

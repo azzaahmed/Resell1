@@ -3,7 +3,9 @@ package com.app.resell;
 import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,8 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mukesh.countrypicker.fragments.CountryPicker;
+import com.mukesh.countrypicker.models.Country;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -27,8 +31,8 @@ public class HomeFragment extends Fragment {
     private GridView gridview;
     private ItemsAdapter imageAdapter;
     public static ProgressDialog progress;
-    Firebase itemListsRef = null;
      DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+    String itemLocationValuePref;
     public HomeFragment() {
     }
 
@@ -43,23 +47,9 @@ public class HomeFragment extends Fragment {
             progress.show();
             progress.setCancelable(false);
         }
+
         Firebase.setAndroidContext(getActivity());
         gridview = (GridView) view.findViewById(R.id.gridview);
-
-
-        if (Utility.isOnline(getActivity())) {
-            itemListsRef = new Firebase("https://resell-8d488.firebaseio.com/").child("items");
-
-            if (itemListsRef == null) {
-                Log.d(TAG, "check reference is null empty items");
-                progress.dismiss();
-            }
-            if (databaseReference.child("items") == null) {
-              progress.dismiss();
-            }
-            imageAdapter = new ItemsAdapter(getActivity(), Item.class, R.layout.image_item, databaseReference.child("items"));
-
-            gridview.setAdapter(imageAdapter);
 
 
             gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,11 +66,6 @@ public class HomeFragment extends Fragment {
                 }
             });
 
-
-        } else {
-            Toast.makeText(getContext(), this.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
-        }
-
         return view;
 
     }
@@ -95,6 +80,35 @@ public class HomeFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        itemLocationValuePref = sharedPrefs.getString(
+                getString(R.string.pref_Location_key),
+                getString(R.string.pref_location_all_countries));
+
+
+        if (Utility.isOnline(getActivity())) {
+
+            if (databaseReference.child("items") == null) {
+                progress.dismiss();
+            }
+
+            if (itemLocationValuePref.equals(getString(R.string.pref_location_all_countries)))
+                imageAdapter = new ItemsAdapter(getActivity(), Item.class, R.layout.image_item, databaseReference.child("items"));
+            else {
+                imageAdapter = new ItemsAdapter(getActivity(), Item.class, R.layout.image_item, databaseReference.child("items").orderByChild("country").equalTo(getCountryName()));
+            }
+            gridview.setAdapter(imageAdapter);
+        } else {
+            Toast.makeText(getContext(), this.getResources().getString(R.string.no_internet_connection), Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private String getCountryName() {
+
+        Country country =   CountryPicker.newInstance("Select Country").getUserCountryInfo(getActivity());
+
+        return country.getName();
     }
 
 }

@@ -13,9 +13,17 @@
         android:title="@string/profile"
         android:orderInCategory="100"
         app:showAsAction="never" />
+
     <item
         android:id="@+id/action_signOut"
         android:title="@string/signOut"
         android:orderInCategory="100"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
         app:showAsAction="never" />
 </menu>
