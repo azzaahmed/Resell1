@@ -10,8 +10,6 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.app.resell.Item;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +26,6 @@ public class FetchItems {
 
     public static final String ACTION_DATA_UPDATED = "com.app.resell.ACTION_DATA_UPDATED";
     public static ArrayList<Item> itemsList = new ArrayList<>();
-    public static ArrayList<Item> itemsCountryList = new ArrayList<>();
     private static final int INITIAL_BACKOFF = 10000;
     private static final int ONE_OFF_ID = 2;
 
@@ -37,11 +34,8 @@ public class FetchItems {
 
     //for widget
     public static void getMyItems(final Context context) {
-        Log.v("Home", "FtechItems get widget data");
+        Log.v("Home", "FetchItems get widget data");
         final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        final FirebaseUser currentUser;
-        currentUser = firebaseAuth.getCurrentUser();
         databaseReference.child("items").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
@@ -103,5 +97,5 @@ public class FetchItems {
                 .setPackage(context.getPackageName());
         context.sendBroadcast(dataUpdatedIntent);
     }
-    
+
 }
